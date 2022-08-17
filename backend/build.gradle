@@ -22,8 +22,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// Swagger
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
+	// mariadb
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
