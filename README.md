@@ -1,2 +1,2 @@
 # kurly-hack-festa
-Curly Hack Festa
+Kurly Hack Festa
