@@ -2,6 +2,8 @@
 <header class="container-fluid">
     <div class="">
         <nav class="main-nav">
+            <Burger></Burger>
+            <Sidebar></Sidebar>
         </nav>
 
         <b-row class="text-center">
@@ -13,10 +15,14 @@
 </template>
 
 <script>
+import Burger from '@/components/Menu/Burger.vue';
+import Sidebar from '@/components/Menu/Sidebar.vue';
 
 export default {
   name: 'LayoutHeader',
   components: {
+    Burger,
+    Sidebar
   }
 }
 </script>
@@ -39,6 +45,7 @@ img {
 }
 .row .col:first-child {
   text-align:initial;
+  z-index: 10001;
 }
 .row .col:first-child img {
   margin-left: 20px;

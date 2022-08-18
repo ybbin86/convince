@@ -12,6 +12,7 @@
     import LayoutHeader from './LayoutHeader.vue'
     import LayoutFooter from './LayoutFooter.vue'
     import LayoutContent from './LayoutContent.vue'
+    import { store, mutations } from '@/store';
 
     export default {
         name: 'Layout',
@@ -19,9 +20,18 @@
             LayoutHeader,
             LayoutFooter,
             LayoutContent
+        },
+        methods: {
+            closeSidebarPanel: mutations.toggleNav,
+        },
+        computed: {
+            isPanelOpen() {
+                return store.isNavOpen
+            }
         }
     }
 </script>
 
 <style scoped>
+
 </style>
