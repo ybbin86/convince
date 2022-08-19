@@ -1,48 +1,57 @@
 {
   "name": "kurly",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "npm run serve"
   },
   "dependencies": {
-    "bootstrap": "^5.2.0",
-    "bootstrap-vue": "^2.22.0",
-    "core-js": "^3.8.3",
-    "vue": "^2.7.8",
-    "vue-router": "^3.5.3",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.10.0"
+    "bootstrap": "4.3.1",
+    "bootstrap-vue": "^2.5.0",
+    "chart.js": "^2.9.3",
+    "d3": "^5.7.0",
+    "datamaps": "^0.5.9",
+    "date-fns": "^1.30.1",
+    "dropzone": "^5.5.1",
+    "element-ui": "2.4.11",
+    "es6-promise": "^4.1.1",
+    "flatpickr": "^4.5.7",
+    "fuse.js": "^3.2.0",
+    "google-maps": "^3.2.1",
+    "nouislider": "^12.1.0",
+    "perfect-scrollbar": "^1.3.0",
+    "quill": "^1.3.6",
+    "sweetalert2": "^9.5.4",
+    "vee-validate": "^3.2.1",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-clipboard2": "^0.3.0",
+    "vue-flatpickr-component": "^8.1.2",
+    "vue-router": "^3.0.6",
+    "vue2-transitions": "^0.2.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "vue-template-compiler": "^2.6.14"
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-plugin-component": "^1.1.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.6.11"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
-  ]
+    "not ie <= 10"
+  ],
+  "author": "납뜩이"
 }
