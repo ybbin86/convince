@@ -2,7 +2,6 @@ package com.festa.hack.kurly.entity;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +21,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     @Column(length = 30, nullable = false)
     private String id;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String password;

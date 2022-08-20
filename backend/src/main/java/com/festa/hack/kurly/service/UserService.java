@@ -7,6 +7,7 @@ import com.festa.hack.kurly.util.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -53,12 +54,12 @@ public class UserService {
 
         response.setHeader("jwt-auth-token", token);
 
-        return RestResponse.success();
+        return ResponseEntity.ok().build();
     }
 
     public ResponseEntity logout() {
 
-        return RestResponse.success();
+        return ResponseEntity.ok().build();
     }
 
     public ResponseEntity signUp(User req) {
@@ -74,11 +75,10 @@ public class UserService {
 
         try {
             userRepository.save(user);
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             return RestResponse.fail(HttpStatus.INTERNAL_SERVER_ERROR, "회원가입이 실패하였습니다.");
         }
 
-        return RestResponse.success();
-
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

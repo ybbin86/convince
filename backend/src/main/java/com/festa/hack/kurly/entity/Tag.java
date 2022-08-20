@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,17 +18,18 @@ public class Tag extends BaseTimeEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
+    @Setter
     private String name;
 
     @Setter
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Setter
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Builder
-    public Tag(String name, LocalDateTime startDate, LocalDateTime endDate) {
+    public Tag(String name, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
