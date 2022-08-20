@@ -11,7 +11,7 @@ const routes = [
     children: [
       {
         path: '/hashtag',
-        name: 'hashtag',
+        name: '해시태그 관리',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -19,7 +19,7 @@ const routes = [
       },
       {
         path: '/add',
-        name: 'add',
+        name: '상품등록',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -27,7 +27,7 @@ const routes = [
       },
       {
         path: '/list',
-        name: 'list',
+        name: '상품목록',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -35,7 +35,7 @@ const routes = [
       },
       {
         path: '/dashboard',
-        name: 'dashboard',
+        name: '대시보드',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
