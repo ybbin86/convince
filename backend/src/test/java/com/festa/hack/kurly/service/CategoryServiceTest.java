@@ -20,9 +20,9 @@ class CategoryServiceTest {
     @Test
     void save() {
         Category category = Category.builder()
-                .name("정육/계란 ")
-                .depth(1)
-                .parentId(0)
+                .name("사과")
+                .depth(2)
+                .parentId(1)
                 .build();
         categoryRepository.save(category);
     }

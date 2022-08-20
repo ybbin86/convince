@@ -2,7 +2,6 @@ package com.festa.hack.kurly.dto;
 
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 

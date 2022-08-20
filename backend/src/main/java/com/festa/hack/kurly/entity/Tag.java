@@ -7,10 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @RequiredArgsConstructor
 public class Tag extends BaseTimeEntity{
 
@@ -19,13 +19,10 @@ public class Tag extends BaseTimeEntity{
     private long id;
 
     @Column(nullable = false, unique = true)
-    @Setter
     private String name;
 
-    @Setter
     private LocalDate startDate;
 
-    @Setter
     private LocalDate endDate;
 
     @Builder

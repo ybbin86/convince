@@ -2,6 +2,7 @@ package com.festa.hack.kurly.controller;
 
 import com.festa.hack.kurly.entity.User;
 import com.festa.hack.kurly.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@Slf4j
 public class UserController {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -24,7 +24,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public ResponseEntity login(HttpServletResponse response, @RequestBody final User user) {
 
-        logger.info("method: POST, api: /login, email: {}", user.getEmail());
+        log.info("method: POST, api: /login, email: {}", user.getEmail());
 
         return userService.login(user, response);
     }
@@ -32,7 +32,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/logout")
     public ResponseEntity logout() {
 
-        logger.info("method: POST, api: /logout");
+        log.info("method: POST, api: /logout");
 
         return userService.logout();
     }
@@ -40,7 +40,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
     public ResponseEntity signup(@RequestBody final User user) {
 
-        logger.info("method: POST, api: /signup");
+        log.info("method: POST, api: /signup");
 
         return userService.signUp(user);
     }
