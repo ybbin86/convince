@@ -1,5 +1,6 @@
 package com.festa.hack.kurly.repository;
 
+import com.festa.hack.kurly.entity.GoodsTagMap;
 import com.festa.hack.kurly.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -7,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TagRepository extends JpaRepository<Tag, Long> {
+public interface GoodsTagMapRepository extends JpaRepository<GoodsTagMap, Long> {
 
-    List<Tag> findAll();
-    List<Tag> findAllByName(String name);
+    List<GoodsTagMap> findAllByGoodsId(long goodsId);
 }

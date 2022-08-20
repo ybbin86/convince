@@ -9,6 +9,7 @@ public enum ErrorCode {
     SIGNUP_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "회원가입이 실패하였습니다."),
     TOKEN_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "토큰 생성이 실패하였습니다."),
     TAG_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "태그 생성이 실패하였습니다."),
+    TAG_NOT_FOUND(HttpStatus.NOT_FOUND, "태그를 찾을 수 없습니다."),
     CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "카테고리를 찾을 수 없습니다."),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다.");
 

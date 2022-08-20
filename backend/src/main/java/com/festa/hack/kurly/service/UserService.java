@@ -1,7 +1,7 @@
 package com.festa.hack.kurly.service;
 
 import com.festa.hack.kurly.entity.User;
-import com.festa.hack.kurly.exception.CustomException;
+import com.festa.hack.kurly.custom.CustomException;
 import com.festa.hack.kurly.repository.UserRepository;
 import com.festa.hack.kurly.security.JwtTokenProvider;
 import com.festa.hack.kurly.type.ErrorCode;

@@ -1,7 +1,7 @@
 package com.festa.hack.kurly.service;
 
 import com.festa.hack.kurly.entity.Tag;
-import com.festa.hack.kurly.exception.CustomException;
+import com.festa.hack.kurly.custom.CustomException;
 import com.festa.hack.kurly.repository.TagRepository;
 import com.festa.hack.kurly.type.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
