@@ -1,11 +1,11 @@
 package com.festa.hack.kurly.service;
 
 import com.festa.hack.kurly.entity.User;
+import com.festa.hack.kurly.exception.CustomException;
 import com.festa.hack.kurly.repository.UserRepository;
 import com.festa.hack.kurly.security.JwtTokenProvider;
-import com.festa.hack.kurly.util.RestResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.festa.hack.kurly.type.ErrorCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -14,12 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.NoSuchElementException;
 
 @Service
+@Slf4j
 public class UserService {
-
-    private static final Logger logger = LoggerFactory.getLogger( UserService.class );
 
     @Autowired
     private UserRepository userRepository;
@@ -32,24 +30,24 @@ public class UserService {
         final String email = req.getEmail();
         final String password = req.getPassword();
         if ( ObjectUtils.isEmpty(email) || ObjectUtils.isEmpty(password)) {
-            logger.error("email or password is required");
-            return RestResponse.fail( HttpStatus.BAD_REQUEST, "이메일을 또는 비밀번호를 입력하세요.");
+            log.error("email or password is required");
+            throw new CustomException(ErrorCode.BAD_REQUEST);
         }
 
         User user = userRepository.findUserByEmailAndPassword(email, password)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         String token = null;
         try {
             token = jwtTokenProvider.createToken(user);
         } catch (Exception e) {
-            logger.error("create token - email: {}, error: {}", email, e.getMessage());
-            return RestResponse.fail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            log.error("create token - email: {}, error: {}", email, e.getMessage());
+            throw new CustomException(ErrorCode.TOKEN_FAILED);
         }
 
         if (token == null) {
-            logger.error("created token is null - email: {}", email);
-            return RestResponse.fail(HttpStatus.INTERNAL_SERVER_ERROR, "로그인이 실패하였습니다.");
+            log.error("created token is null - email: {}", email);
+            throw new CustomException(ErrorCode.TOKEN_FAILED);
         }
 
         response.setHeader("jwt-auth-token", token);
@@ -76,7 +74,8 @@ public class UserService {
         try {
             userRepository.save(user);
         } catch (DataAccessException e) {
-            return RestResponse.fail(HttpStatus.INTERNAL_SERVER_ERROR, "회원가입이 실패하였습니다.");
+            log.error("user save exception: {}", e.getMessage());
+            throw new CustomException(ErrorCode.SIGNUP_FAILED);
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).build();

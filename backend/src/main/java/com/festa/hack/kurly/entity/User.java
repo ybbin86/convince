@@ -1,8 +1,6 @@
 package com.festa.hack.kurly.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +13,14 @@ import java.util.stream.Collectors;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends BaseTimeEntity implements UserDetails {
 
     @Id
-    @Column(length = 30, nullable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -32,17 +33,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     private int role;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
     private final List<String> roles = new ArrayList<>();
-
-    @Builder
-    public User(String id, String email, String password, String name, int role) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.role = role;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

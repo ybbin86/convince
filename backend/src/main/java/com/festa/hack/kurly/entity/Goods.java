@@ -1,5 +1,6 @@
 package com.festa.hack.kurly.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.festa.hack.kurly.converter.StringListConverter;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @RequiredArgsConstructor
 public class Goods extends BaseTimeEntity {
 
@@ -26,12 +28,14 @@ public class Goods extends BaseTimeEntity {
 
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @Setter
     private Category category;
+
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "json")
-    @Setter
     @Getter
     private List<String> sellGoodsList;
 

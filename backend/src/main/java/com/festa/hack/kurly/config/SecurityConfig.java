@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
                 .and()
                 .authorizeRequests()
-                .antMatchers( "/goods" ).authenticated()
+                //.antMatchers( "/goods" ).authenticated()
                 .antMatchers( "/tag" ).authenticated()
                 .antMatchers( "/category" ).authenticated()
                 .antMatchers( "/admin/**" ).hasRole( Role.ADMIN.name() )
