@@ -1,6 +1,5 @@
 package com.festa.hack.kurly.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.festa.hack.kurly.converter.StringListConverter;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +25,7 @@ public class Goods extends BaseTimeEntity {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 

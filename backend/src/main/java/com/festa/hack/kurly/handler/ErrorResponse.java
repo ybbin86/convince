@@ -1,4 +1,4 @@
-package com.festa.hack.kurly.exception;
+package com.festa.hack.kurly.handler;
 
 import com.festa.hack.kurly.type.ErrorCode;
 import lombok.Getter;
