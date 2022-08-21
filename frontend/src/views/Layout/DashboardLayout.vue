@@ -4,23 +4,12 @@
     <side-bar>
       <template slot="links">
         <sidebar-item
-          :link="{
-            name: '대시보드',
-            path: '/dashboard',
-            icon: 'ni ni-tv-2 text-primary',
-          }"
-        >
-        </sidebar-item>
-
-        <sidebar-item
-            :link="{
-              name: '해시태그 관리',
-              path: '/hashtag',
-              icon: 'ni ni-tag text-blue'
-              }"
-            >
-        </sidebar-item>
-
+              :link="{
+                name: '상품목록',
+                path: '/list',
+                icon: 'ni ni-bullet-list-67 text-red'
+                }">
+        </sidebar-item> 
         <sidebar-item
               :link="{
                 name: '상품등록',
@@ -28,13 +17,13 @@
                 icon: 'ni ni-app text-orange'
               }">
         </sidebar-item>
-
         <sidebar-item
-              :link="{
-                name: '상품목록',
-                path: '/list',
-                icon: 'ni ni-bullet-list-67 text-red'
-                }">
+            :link="{
+              name: '해시태그 관리',
+              path: '/hashtag',
+              icon: 'ni ni-tag text-blue'
+              }"
+            >
         </sidebar-item>
       </template>
     </side-bar>
