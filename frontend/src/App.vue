@@ -45,4 +45,8 @@ export default {
 input[type="number"] {
   text-align: right;
 }
+
+.modal-dialog {
+  min-width: 1000px !important;
+}
 </style>
