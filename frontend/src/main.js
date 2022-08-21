@@ -23,11 +23,28 @@ import router from './routes/router';
 
 import axios from "axios";
 
+import swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.css'
+
+import sample from './sample.Vue'
+
 // plugin setup
 Vue.use(DashboardPlugin);
 
 axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.headers.post["Content-Type"] = "application/json; charset=utf-8"
+
+const _axios = axios.create({
+  withCredentials: true
+});
+
 Vue.prototype.$axios = axios;
+
+Vue.prototype.$swal = swal;
+
+Vue.prototype.$sample = sample;
+
+
 
 //필터
 //숫자 3자리 단위마다 콤마를 찍는다.
