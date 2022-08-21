@@ -1,79 +1,89 @@
 <template>
-    <b-card no-body>
-        <b-card-header class="border-0">
-            <h3 class="mb-0">상품목록</h3>
-        </b-card-header>
+    <b-card no-body>  
+      <b-card-header class="border-0">
+          <h3 class="mb-0">상품목록</h3>
+      </b-card-header>
 
-        <el-table class="table-responsive table"
-                  header-row-class-name="thead-light"
-                  :data="list">
-            <el-table-column label="제품이미지"
-                             min-width="180px"
-                             prop="name">
-                <template v-slot="{row}">
-                    <b-media no-body class="align-items-center">
-                        <a href="#" class="avatar rounded-0 mr-3">
-                            <img alt="Image placeholder" :src="row.img">
-                        </a>
-                    </b-media>
-                </template>
-            </el-table-column>
+      <el-table class="table-responsive table"
+                header-row-class-name="thead-light"
+                :data="list">
+          <el-table-column label="제품이미지"
+                            min-width="180px"
+                            prop="name">
+              <template v-slot="{row}">
+                  <b-media no-body class="align-items-center">
+                      <a href="#" class="avatar rounded-0 mr-3">
+                          <img alt="Image placeholder" :src="row.img">
+                      </a>
+                  </b-media>
+              </template>
+          </el-table-column>
 
-            <el-table-column label="카테고리"
-                             prop="category"
-                             min-width="140px">
-            </el-table-column>
+          <el-table-column label="카테고리"
+                            prop="category"
+                            min-width="140px">
+          </el-table-column>
 
-            <el-table-column label="상품명"
-                             prop="name"
-                             min-width="140px">
-            </el-table-column>
+          <el-table-column label="상품명"
+                            prop="name"
+                            min-width="140px">
+          </el-table-column>
 
-            <el-table-column label="해시태그"
-                             min-width="170px"
-                             class="hashtag">
-             <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-              <div>
-                <i class="ni">#</i>
-                <span>복날</span>
-              </div>
-            </b-button>
-
+          <el-table-column label="해시태그"
+                            min-width="170px"
+                            class="hashtag">
             <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-              <div>
-                <i class="ni">#</i>
-                <span>제철사과</span>
-              </div>
-            </b-button>
+            <div>
+              <i class="ni">#</i>
+              <span>복날</span>
+            </div>
+          </b-button>
 
-            </el-table-column>
+          <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
+            <div>
+              <i class="ni">#</i>
+              <span>제철사과</span>
+            </div>
+          </b-button>
 
-            <el-table-column label="등록일시"
-                             prop="insDate"
-                             min-width="140px">
-            </el-table-column>
+          </el-table-column>
 
-            <el-table-column label="상품 가격(초기값)"
-                             min-width="170px"
-                             prop="price">
-            </el-table-column>
+          <el-table-column label="등록일시"
+                            prop="insDate"
+                            min-width="140px">
+          </el-table-column>
 
-            <el-table-column label="실시간 가격(변동가)"
-                             prop="dynamicPrice"
-                             min-width="240px">
-            </el-table-column>
-        </el-table>
+          <el-table-column label="상품 가격(초기값)"
+                            min-width="170px"
+                            prop="price">
+          </el-table-column>
 
-        <b-card-footer class="py-4 d-flex justify-content-center">
-            <base-pagination v-model="currentPage" :per-page="10" :total="50"></base-pagination>
-        </b-card-footer>
-    </b-card>
+          <el-table-column label="실시간 가격(변동가)"
+                            min-width="240px">
+            <template v-slot="{row}">
+                      {{row.dynamicPrice}}
+              <b-button v-b-modal.chart-modal class="ml-3" size="sm" variant="outline-primary"><i class="ni ni-chart-bar-32"></i></b-button>
+          </template>
+          </el-table-column>
+      </el-table>
+      <b-card-footer class="py-4 d-flex justify-content-center">
+          <base-pagination v-model="currentPage" :per-page="10" :total="50"></base-pagination>
+      </b-card-footer>
+
+      <!-- Modal -->          
+      <b-modal id="chart-modal" title="실시간 가격 변동 차트" hide-footer centered >
+        <chart></chart>
+      </b-modal>
+  </b-card>
 </template>
 <script>
   import { Table, TableColumn} from 'element-ui'
+  import Chart from '../Pages/Chart.vue'
+
   export default {
     name: 'goods-table',
     components: {
+      Chart,
       [Table.name]: Table,
       [TableColumn.name]: TableColumn
     },
