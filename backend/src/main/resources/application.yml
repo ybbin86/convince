@@ -1,46 +1,8 @@
 server:
   port: 8000
 spring:
-  application:
-    name: kurly
-    
----
-# prod
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://3.37.92.138:3006/kulry?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
-    username: root
-    password: kurly1234
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    generate-ddl: true
-    show-sql: false
-    properties:
-      hibernate.format_sql: true
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDB103Dialect
-
----
-
-# local
-spring:
-  config:
-    activate:
-      on-profile: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/kulry?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
     username: root
     password: kurly1234
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    generate-ddl: true
-    show-sql: true
