@@ -3,6 +3,6 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/kulry?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
+    url: jdbc:mariadb://localhost:3306/kurly?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
     username: root
     password: kurly1234
