@@ -27,7 +27,7 @@ public class TagService {
         if (ObjectUtils.isEmpty(name)) {
             tagList = tagRepository.findAll();
         } else {
-            tagList = tagRepository.findAllByName(name);
+            tagList = tagRepository.findAllByNameContains(name);
         }
 
         return ResponseEntity.ok(tagList);
