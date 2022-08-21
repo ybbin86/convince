@@ -8,97 +8,31 @@
             </b-col>
         </b-row>
       <b-row>
-        <b-col xl="4" md="12" >
-            <b-card title="TOP1" class="text-center mb-4" >
+        <b-col xl="4" md="12" v-for="(item, index) in list" :key="index">
+            <b-card class="text-center mb-4" >
+                <b-card-title>
+                        TOP {{index+1}}
+                </b-card-title>
+                
                 <!-- Card body -->
                 <b-row align-v="center">
                     <b-col md="auto">
-                        <b-img src="img/theme/team-1.jpg"
-                        fluid
-                        rounded="circle"
-                        class="img-center shadow shadow-lg--hover" style="width: 140px;" />
+                        <div class="top3-image-div avatar">
+                            <b-img :src="item.image"
+                            fluid
+                            class="img-center shadow shadow-lg--hover top3-image"/>
+                        </div>
                     </b-col>
                     <b-col class="ml--2">
                         <h2 class="mb-2">
-                            <a href="javascript:;">납뜩이 사과</a>
+                            <a href="javascript:;">{{item.name}}</a>
                         </h2>
-                        <h2 class="text-muted mb-4">5500원</h2>
-                        <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
+                        <h2 class="text-muted mb-4">{{item.price | numCommaFilter}} 원</h2>
+                        <b-button type="button" v-for="hash in item.tags" :key="hash" class="hashtag" variant="outline-primary" size="sm">
                         <div>
                             <i class="ni">#</i>
-                            <span>복날</span>
+                            <span>{{hash}}</span>
                         </div>
-                        </b-button>
-
-                        <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-                        <div>
-                            <i class="ni">#</i>
-                            <span>제철사과</span>
-                        </div>
-                        </b-button>
-                    </b-col>
-                </b-row>
-            </b-card>
-        </b-col>
-        <b-col xl="4" md="12">
-            <b-card title="TOP2" class="text-center mb-4">
-                <!-- Card body -->
-                <b-row align-v="center">
-                    <b-col md="auto">
-                        <b-img src="img/theme/team-1.jpg"
-                        fluid
-                        rounded="circle"
-                        class="img-center shadow shadow-lg--hover" style="width: 140px;" />
-                    </b-col>
-                    <b-col class="ml--2">
-                        <h2 class="mb-2">
-                            <a href="javascript:;">납뜩이 사과</a>
-                        </h2>
-                        <h2 class="text-muted mb-4">5500원</h2>
-                        <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-                            <div>
-                                <i class="ni">#</i>
-                                <span>복날</span>
-                            </div>
-                            </b-button>
-
-                            <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-                            <div>
-                                <i class="ni">#</i>
-                                <span>제철사과</span>
-                            </div>
-                        </b-button>
-                    </b-col>
-                </b-row>
-            </b-card>
-        </b-col>
-        <b-col xl="4" md="12">
-            <b-card title="TOP3" class="text-center mb-4">
-                <!-- Card body -->
-                <b-row align-v="center">
-                    <b-col md="auto">
-                        <b-img src="img/theme/team-1.jpg"
-                        fluid
-                        rounded="circle"
-                        class="img-center shadow shadow-lg--hover" style="width: 140px;" />
-                    </b-col>
-                    <b-col class="ml--2">
-                        <h2 class="mb-2">
-                            <a href="javascript:;">납뜩이 사과</a>
-                        </h2>
-                        <h2 class="text-muted mb-4">5500원</h2>
-                        <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-                            <div>
-                                <i class="ni">#</i>
-                                <span>복날</span>
-                            </div>
-                            </b-button>
-
-                            <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-                            <div>
-                                <i class="ni">#</i>
-                                <span>제철사과</span>
-                            </div>
                         </b-button>
                     </b-col>
                 </b-row>
@@ -117,25 +51,41 @@
   </div>
 </template>
 <script>
-  import { Dropdown, DropdownItem, DropdownMenu, Table, TableColumn } from 'element-ui';
-  import projects from '../Tables/projects'
-  import users from '../Tables/users'
   import GoodsTable from "../Tables/GoodsTable";
 
   export default {
     components: {
       GoodsTable,
-      [Dropdown.name]: Dropdown,
-      [DropdownItem.name]: DropdownItem,
-      [DropdownMenu.name]: DropdownMenu,
-      [Table.name]: Table,
-      [TableColumn.name]: TableColumn
     },
     data() {
       return {
-        projects,
-        users,
+        list: this.$sample.goodsList.data
       };
+    },
+    created() {
+      //this.getGoodsList();
+    },
+     methods: {
+      getNoimage(e) {
+        e.target.src = require("assets/noimage.jpg");
+      },
+      getGoodsList() {
+        var params = {
+          page: this.currentPage,
+          size: this.perPage-1,
+          sort: 'id:desc'
+        };
+
+        var url="/goods";
+        this.$axios.get(url, params)
+        .then((res) => { //요청 성공      
+          this.list = res.data;
+        })
+        .catch((error) => { //요청 실패
+          console.log("상품 목록을 불러오는 데 실패하였습니다.");
+        });
+
+      }
     }
   };
 </script>
@@ -158,5 +108,15 @@
 
 h2 a{
   color: #59368F;
+}
+
+.top3-image-div {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+}
+.top3-image {
+    width: 150px;
+    min-height: 150px;
 }
 </style>

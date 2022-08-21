@@ -1,77 +1,88 @@
 <template>
     <b-card no-body>  
       <b-card-header class="border-0">
+          <span class="float-right"><h5>1시간 기준으로 가격이 변동됩니다.</h5></span>
           <h3 class="mb-0">상품목록</h3>
       </b-card-header>
 
       <el-table class="table-responsive table"
                 header-row-class-name="thead-light"
-                :data="list">
+                :data="tableData">
           <el-table-column label="제품이미지"
                             min-width="180px"
                             prop="name">
               <template v-slot="{row}">
                   <b-media no-body class="align-items-center">
-                      <a href="#" class="avatar rounded-0 mr-3">
-                          <img alt="Image placeholder" :src="row.img">
+                      <a href="#" class="mr-3">
+                          <b-img alt="Image placeholder" :src="row.image"  @error="getNoimage"/>
                       </a>
                   </b-media>
               </template>
           </el-table-column>
 
-          <el-table-column label="카테고리"
-                            prop="category"
-                            min-width="140px">
+          <el-table-column label="품목"
+                            prop="categoryName"
+                            min-width="100px">
           </el-table-column>
 
           <el-table-column label="상품명"
                             prop="name"
-                            min-width="140px">
+                            min-width="200px">
           </el-table-column>
 
           <el-table-column label="해시태그"
-                            min-width="170px"
+                            min-width="150px"
                             class="hashtag">
-            <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-            <div>
-              <i class="ni">#</i>
-              <span>복날</span>
-            </div>
-          </b-button>
-
-          <b-button type="button" class="hashtag" variant="outline-primary" size="sm">
-            <div>
-              <i class="ni">#</i>
-              <span>제철사과</span>
-            </div>
-          </b-button>
-
-          </el-table-column>
-
-          <el-table-column label="등록일시"
-                            prop="insDate"
-                            min-width="140px">
-          </el-table-column>
-
-          <el-table-column label="상품 가격(초기값)"
-                            min-width="170px"
-                            prop="price">
-          </el-table-column>
-
-          <el-table-column label="실시간 가격(변동가)"
-                            min-width="240px">
             <template v-slot="{row}">
-                      {{row.dynamicPrice}}
-              <b-button v-b-modal.chart-modal class="ml-3" size="sm" variant="outline-primary"><i class="ni ni-chart-bar-32"></i></b-button>
-          </template>
+              <b-button type="button" v-for="tag in row.tags" :key="tag" class="hashtag" variant="outline-primary" size="sm">
+                <div>
+                  <i class="ni">#</i>
+                  <span>{{tag}}</span>
+                </div>
+              </b-button>
+            </template>
+          </el-table-column>
+
+          <el-table-column :label="label[0]"
+                            min-width="250px">
+            <template v-slot="{row}">
+                    {{row.price}} /
+                    <span class="mr-2" type="" :class="`text-${row.sub_price_class}`">
+                        <i :class="`ni ni-bold-${row.sub_price_updown}`"></i>
+                        <span class="subprice-text">{{row.sub_price | numCommaFilter }} 원</span>
+                    </span> 
+                    <b-button v-b-modal.chart-modal class="ml-3" size="sm" variant="outline-primary"><i class="ni ni-chart-bar-32"></i></b-button>
+ 
+           </template>
+          </el-table-column>
+
+          <el-table-column :label="label[1]"
+                  min-width="90px"
+                  prop="margin_rate">
+          </el-table-column>
+
+
+          <el-table-column :label="label[2]"
+                            min-width="90px"
+                            prop="margin_min">
+          </el-table-column>
+
+          <el-table-column :label="label[3]"
+                            min-width="90px"
+                            prop="margin_max">
+          </el-table-column>
+          <el-table-column label="원가"
+                            min-width="100px"
+                            prop="cost">
           </el-table-column>
       </el-table>
+
       <b-card-footer class="py-4 d-flex justify-content-center">
-          <base-pagination v-model="currentPage" :per-page="10" :total="50"></base-pagination>
+          <base-pagination v-model="currentPage" :per-page="perPage" :total="total"></base-pagination>
       </b-card-footer>
 
       <!-- Modal -->          
-      <b-modal id="chart-modal" title="실시간 가격 변동 차트" hide-footer centered >
+      <b-modal id="chart-modal" title="실시간 가격 변동 차트 (기준 7일)" hide-footer centered >
         <chart></chart>
       </b-modal>
   </b-card>
@@ -90,21 +101,72 @@
     data() {
       return {
         currentPage: 1,
-        value: ['apple', 'orange', 'banana', 'pear', 'peach'],
-        list: [
-            {img: 'src', insDate: '2022.07.10 00:00:00', name: '아오리사과', price: '5000원', hashtag: '#복날, #제철사과', hashtagPeriod: '2022.06.01~2022.06.30', dynamicPrice: '5300/ +1000원', category: '과일류 > 사과'},
-            {img: 'src', insDate: '2022.07.10 00:00:00',  name: '아오리사과', price: '5000원', hashtag: '#복날, #제철사과', hashtagPeriod: '2022.06.01~2022.06.30', dynamicPrice: '5300/ +1000원', category: '과일류 > 사과'},
-            {img: 'src', insDate: '2022.07.10 00:00:00',  name: '아오리사과', price: '5000원', hashtag: '#복날, #제철사과', hashtagPeriod: '2022.06.01~2022.06.30', dynamicPrice: '5300/ +1000원', category: '과일류 > 사과'},
-            {img: 'src', insDate: '2022.07.10 00:00:00',  name: '아오리사과', price: '5000원', hashtag: '#복날, #제철사과', hashtagPeriod: '2022.06.01~2022.06.30', dynamicPrice: '5300/ +1000원', category: '과일류 > 사과'}
-        ]
+        perPage: 2,   
+        total: 0,
+        //list: this.$sample.goodsList.data,
+        list: [],
+        label: [`실시간 가격(변동가)`, `실시간\n마진율`, `마진율\n하한`, `마진율\n상한`]
       };
+    }, 
+    computed: {
+      tableData() {
+        if(!this.list || this.list.size == 0) {
+          return [];
+        }
+
+        debugger;
+        return this.list.map(d => {
+          return {
+            ...d,
+            margin_rate: ((d.price - d.cost) / d.price * 100).toFixed() + ' %',
+            margin_min: d.margin_min + ' %',
+            margin_max: d.margin_max + ' %',
+            cost: this.$options.filters.numCommaFilter(d.cost) + ' 원',
+            price: this.$options.filters.numCommaFilter(d.price) + ' 원',
+            sub_price: d.price-d.before_price,
+            sub_price_class: d.price-d.before_price > 0 ? 'danger' : d.price-d.before_price < 0 ? 'info' : '',
+            sub_price_updown: d.price-d.before_price > 0 ? 'up' : d.price-d.before_price < 0 ? 'down' : ''
+          }
+        });
+      }
+    },
+    created() {
+      this.getGoodsList();
+    },
+    methods: {
+      getNoimage(e) {
+        e.target.src = require("assets/noimage.jpg");
+      },
+      getGoodsList() {
+        var url="/goods";
+        var params = {
+          page: this.currentPage,
+          size: this.perPage-1,
+          sort: 'id:desc'
+        };
+
+        this.$axios.get(url)
+        .then((res) => { //요청 성공   
+          this.total = res.total;
+          this.list = res.data;
+        })
+        .catch((error) => { //요청 실패
+          console.log("상품 목록을 불러오는 데 실패하였습니다.");
+        });
+      }
     }
   }
 </script>
 
 <style scoped>
-.avatar {
-  width: 100px;
-  height: 100px;
+img {
+  width: 150px;
+  height: 150px;
+}
+.ni-bold-up {
+  vertical-align: revert;
+}
+.ni-bold-down {
+  vertical-align: middle;
 }
 </style>

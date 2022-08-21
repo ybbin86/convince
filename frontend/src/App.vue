@@ -50,10 +50,15 @@ input[type="number"] {
   min-width: 1000px !important;
 }
 
+table .thead-light th{
+ vertical-align: middle;
+}
+
 table .thead-light th div.cell {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #1d2126;
+  white-space: pre-line;
 }
 
 table .thead-light {
