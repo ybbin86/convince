@@ -34,17 +34,13 @@ spring:
     activate:
       on-profile: local
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/kulry?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
-    username: koot
-    password: 5647apfhd!
+    username: root
+    password: kurly1234
 
   jpa:
     hibernate:
       ddl-auto: update
     generate-ddl: true
     show-sql: true
-    properties:
-      hibernate.format_sql: true
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDB103Dialect
