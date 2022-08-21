@@ -47,6 +47,10 @@ public class GoodsService {
 
     public ResponseEntity get(GoodsDto.GetReq goodsDto) {
 
+        if (ObjectUtils.isEmpty(goodsDto.getSort()) || !goodsDto.getSort().contains(":")) {
+            throw new CustomException(ErrorCode.BAD_REQUEST);
+        }
+
         String[] sort = goodsDto.getSort().split(":");
         Sort.Direction direction;
         if (sort[1].equals("desc")) {
@@ -79,8 +83,16 @@ public class GoodsService {
             for (GoodsTagMap goodsTagMap : goodsTagMaps) {
                 tags.add(goodsTagMap.getTag().getName());
             }
+
+            int beforePrice = 0;
+            Optional<PriceHistory> priceHistory = priceHistoryRepository.findPriceHistoryByGoodsIdBeforePrice(content.getId());
+            if (priceHistory.isPresent()) {
+                beforePrice = priceHistory.get().getPrice();
+            }
+
             GoodsDto.GetRes dto = modelMapper.map(content, GoodsDto.GetRes.class);
             dto.setTags(tags);
+            dto.setBeforePrice(beforePrice);
             res.add(dto);
         }
 

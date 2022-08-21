@@ -56,6 +56,7 @@ public class GoodsDto {
         private float marginMin;
         private List<String> tags;
         private String categoryName;
+        private int beforePrice;
     }
 
 
