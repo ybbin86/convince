@@ -43,6 +43,7 @@ public class GoodsDto {
     @Setter
     @Data
     public static class GetRes {
+        private String id;
         private String name;
         private String image;
         @JsonProperty("detail_image")
