@@ -18,10 +18,10 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @RequestMapping( method = RequestMethod.GET, value = "/{depth}" )
-    public ResponseEntity get(@PathVariable( "depth" ) int depth ) {
+    public ResponseEntity get(@PathVariable( "depth" ) int depth, int parent_id ) {
 
-        log.info( "method: GET, api: /category/{depth} - depth: {}", depth );
+        log.info( "method: GET, api: /category/{depth} - depth: {}, parent_id: {}", depth, parent_id );
 
-        return categoryService.findAll(depth);
+        return categoryService.findAll(depth, parent_id);
     }
 }
