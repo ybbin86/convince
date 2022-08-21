@@ -49,4 +49,18 @@ input[type="number"] {
 .modal-dialog {
   min-width: 1000px !important;
 }
+
+table .thead-light th div.cell {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1d2126;
+}
+
+table .thead-light {
+  height: 55px;
+}
+
+table tbody .el-table__row div.cell {
+  font-size: 16px;
+}
 </style>

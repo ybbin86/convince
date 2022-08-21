@@ -3,10 +3,10 @@
         <b-card-header class="border-0">
             <h3 class="mb-0">해시태그 목록</h3>
         </b-card-header>
-
+        
         <el-table class="table-responsive table"
                   header-row-class-name="thead-light"
-                  :data="list">
+                  :data="tableData">
             <el-table-column label="해시태그명"
                              min-width="140px">
               <template v-slot="{row}">
@@ -26,7 +26,7 @@
             </el-table-column>
 
             <el-table-column label="등록일시"
-                             prop="insDate"
+                             prop="createdTime"
                              min-width="140px">
             </el-table-column>
         </el-table>
@@ -42,15 +42,39 @@
     },
     data() {
       return {
-        currentPage: 1,
-        value: ['apple', 'orange', 'banana', 'pear', 'peach'],
-        list: [
-            {name: '복날', period: '2022.06.01~2022.06.30', insDate: '2022-08-10 22:22:22'},
-            {name: '복날', period: '2022.06.01~2022.06.30', insDate: '2022-08-10 22:22:22'},
-            {name: '복날', period: '2022.06.01~2022.06.30', insDate: '2022-08-10 22:22:22'},
-            {name: '복날', period: '2022.06.01~2022.06.30', insDate: '2022-08-10 22:22:22'},
-        ]
+        //list: this.$sample.hashtagList
+        list: []
       };
+    },
+    computed: {
+      tableData() {
+        if(this.list.size  == 0) {
+          return [];
+        }
+
+        return this.list.map(d => {
+          return {
+            ...d,
+            period: d.startDate + ' ~ ' + d.endDate
+          }
+        });
+      }
+    },
+    created() {
+      this.getHashtagList();
+    },
+    methods: {
+      getHashtagList() {
+        var url="/tag";
+
+        this.$axios.get(url)
+        .then((res) => { //요청 성공   
+          this.list = res.data;
+        })
+        .catch((error) => { //요청 실패
+          console.log("해시태그 목록을 불러오는 데 실패하였습니다.");
+        });
+      },
     }
   }
 </script>

@@ -7,28 +7,27 @@
         <b-col xl="5" md="12">
             <label for="example-date-input" class="col-md-12 col-form-label form-control-label">해시태그명</label>
             <b-col md="12">
-                <b-form-input list="my-list-id"></b-form-input>
+                <b-form-input list="my-list-id" v-model="hashtag.name"></b-form-input>
 
                 <datalist id="my-list-id">
-                    <option>Manual Option</option>
-                    <option v-for="size in 10" :key="size">{{ size }}</option>
+                    <option v-for="item in list" :key="item">{{ item.name }}</option>
                 </datalist>
             </b-col>
         </b-col>
         <b-col xl="3" md="12">
             <label for="example-date-input" class="col-md-12 col-form-label form-control-label">시작일</label>
             <b-col md="12">
-            <base-input type="date" value="2018-11-23" id="example-date-input"/>
+            <base-input type="date" v-model="hashtag.start_date" id="example-date-input"/>
             </b-col>
         </b-col>
         <b-col xl="3" md="12">
             <label for="example-date-input" class="col-md-12 col-form-label form-control-label">종료일</label>
             <b-col md="12">
-            <base-input type="date" value="2018-11-23" id="example-date-input"/>
+            <base-input type="date" v-model="hashtag.end_date" id="example-date-input"/>
             </b-col>
         </b-col>
          <b-col xl="1" md="12" class="hashtag-add-col text-right">
-            <b-button class="hashtag-add-button" variant="outline-primary">등록하기</b-button>
+            <b-button  class="hashtag-add-button" variant="outline-primary" @click="addHashtag">등록하기</b-button>
          </b-col>
       </b-row>
       <!-- <b-row>
@@ -39,7 +38,7 @@
     <b-container fluid class="mt--7">
       <b-row>
         <b-col>
-          <hashtag-table/>
+          <hashtag-table ref="hashtagTable"/>
         </b-col>
       </b-row>
       <div class="mt-5"></div>
@@ -47,25 +46,77 @@
   </div>
 </template>
 <script>
-  import { Dropdown, DropdownItem, DropdownMenu, Table, TableColumn } from 'element-ui';
-  import projects from '../Tables/projects'
-  import users from '../Tables/users'
   import HashtagTable from "../Tables/HashtagTable";
 
   export default {
     components: {
       HashtagTable,
-      [Dropdown.name]: Dropdown,
-      [DropdownItem.name]: DropdownItem,
-      [DropdownMenu.name]: DropdownMenu,
-      [Table.name]: Table,
-      [TableColumn.name]: TableColumn
     },
     data() {
       return {
-        projects,
-        users,
+        hashtag: {
+          name: '',
+          start_date: '',
+          end_date: ''
+        },
+        list: this.$sample.hashtagList
       };
+    },
+    created() {
+      this.getHashtagList();
+    },
+    methods: {
+      getHashtagList() {
+        var url="/tag";
+
+        this.$axios.get(url)
+        .then((res) => { //요청 성공   
+          this.list = res.data;
+        })
+        .catch((error) => { //요청 실패
+        });
+      },
+      addHashtag() {
+        if(!this.hashtag.name || !this.hashtag.start_date || !this.hashtag.end_date) {
+          this.$swal.fire({
+            title: `Fail`,
+            text: `등록에 실패하였습니다.`,
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-warning',
+            icon: 'warning'
+          });
+
+          return;
+        }
+
+        var url="/tag";
+        var params = this.hashtag;
+        
+        this.$axios.post(url, params)
+        .then((res) => { //요청 성공     
+        
+          this.$refs.hashtagTable.getHashtagList();    
+          this.hashtag = [];
+
+          this.$swal.fire({
+            title: `Success`,
+            text: '등록에 성공하였습니다.',
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-success',
+            icon: 'success'
+          });
+          
+        })
+        .catch((error) => { //요청 실패
+          this.$swal.fire({
+            title: `Fail`,
+            text: `등록에 실패하였습니다.`,
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-warning',
+            icon: 'warning'
+          });
+        });
+      },
     }
   };
 </script>
