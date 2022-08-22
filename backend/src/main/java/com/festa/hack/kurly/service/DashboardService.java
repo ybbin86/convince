@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +35,11 @@ public class DashboardService {
 
         LocalDateTime ldt = LocalDateTime.now();
         LocalDateTime before7 = ldt.minusDays(refDay);
+        String strBefore7 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(before7);
 
-        List<PriceHistory> priceHistoryList = priceHistoryRepository.findAllByGoodsIdAndCreatedTimeAfter(id, before7);
+        List<PriceHistory> priceHistoryList = priceHistoryRepository.findAllByGoodsIdAndCreatedTimeAfter(id, strBefore7);
 
-        List<LocalDateTime> labels = priceHistoryList.stream().map(PriceHistory::getCreatedTime).collect(Collectors.toList());
+        List<String> labels = priceHistoryList.stream().map(PriceHistory::getCreatedTime).collect(Collectors.toList());
         List<Integer> prices = priceHistoryList.stream().map(PriceHistory::getPrice).collect(Collectors.toList());
 
         Map<String, Object> result = new HashMap<>();
