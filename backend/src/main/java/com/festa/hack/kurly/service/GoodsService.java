@@ -140,6 +140,6 @@ public class GoodsService {
 
         priceHistoryRepository.save(priceHistory);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
