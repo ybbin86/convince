@@ -32,7 +32,7 @@ public class GoodsController {
     @RequestMapping( method = RequestMethod.POST )
     public ResponseEntity create(@RequestBody GoodsDto.Create goodsDto) {
 
-        log.info( "method: POST, api: /goods - name: {}, category_id: {}, image: {}, detail_image: {}, price: {}, cost: {}, margin_max: {}, margin_min: {}",
+        log.info( "method: POST, api: /goods - name: {}, email: {}, category_id: {}, image: {}, detail_image: {}, price: {}, cost: {}, margin_max: {}, margin_min: {}",
                 goodsDto.getName(), goodsDto.getEmail(), goodsDto.getCategoryId(), goodsDto.getImage(), goodsDto.getDetailImage(), goodsDto.getPrice(), goodsDto.getCost(), goodsDto.getMarginMax(), goodsDto.getMarginMin() );
 
         return goodsService.create(goodsDto);
