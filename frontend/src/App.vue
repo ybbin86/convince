@@ -46,6 +46,10 @@ input[type="number"] {
   text-align: right;
 }
 
+.form-control, .form-control:focus {
+  color: rgb(29, 26, 26);
+}
+
 .modal-dialog {
   min-width: 1000px !important;
 }

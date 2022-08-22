@@ -27,6 +27,7 @@ import swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css'
 
 import sample from './sample.Vue'
+import aws_info from './aws_info.Vue'
 
 // plugin setup
 Vue.use(DashboardPlugin);
@@ -44,6 +45,7 @@ Vue.prototype.$swal = swal;
 
 Vue.prototype.$sample = sample;
 
+Vue.prototype.$aws_info = aws_info;
 
 
 //필터
