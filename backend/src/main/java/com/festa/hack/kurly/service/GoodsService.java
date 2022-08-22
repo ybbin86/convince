@@ -93,6 +93,7 @@ public class GoodsService {
             GoodsDto.GetRes dto = modelMapper.map(content, GoodsDto.GetRes.class);
             dto.setTags(tags);
             dto.setBeforePrice(beforePrice);
+
             res.add(dto);
         }
 
@@ -141,5 +142,30 @@ public class GoodsService {
         priceHistoryRepository.save(priceHistory);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    public ResponseEntity detail(long id) {
+
+        Goods goods = goodsRepository.findById(id)
+                .orElseThrow(()-> new CustomException(ErrorCode.GOODS_NOT_FOUND));
+
+        GoodsDto.GetRes dto = this.getDtoRes(goods, id);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(dto);
+
+    }
+
+    private GoodsDto.GetRes getDtoRes(Goods goods, long goodsId) {
+        List<GoodsTagMap> goodsTagMaps = goodsTagMapRepository.findAllByGoodsId(goodsId);
+
+        List<String> tags = new ArrayList<>();
+        for (GoodsTagMap goodsTagMap : goodsTagMaps) {
+            tags.add(goodsTagMap.getTag().getName());
+        }
+        GoodsDto.GetRes dto = modelMapper.map(goods, GoodsDto.GetRes.class);
+        dto.setTags(tags);
+
+        return dto;
     }
 }
