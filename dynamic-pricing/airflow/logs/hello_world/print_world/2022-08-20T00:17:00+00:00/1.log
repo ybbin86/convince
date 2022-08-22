@@ -1,0 +1,30 @@
+[2022-08-21 13:12:20,406] {logging_mixin.py:109} WARNING - /home/ubuntu/anaconda3/lib/python3.9/site-packages/airflow/models/dagrun.py:418 SAWarning: TypeDecorator UtcDateTime(timezone=True) will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
+[2022-08-21 13:12:20,410] {taskinstance.py:1035} INFO - Dependencies all met for <TaskInstance: hello_world.print_world scheduled__2022-08-20T00:17:00+00:00 [queued]>
+[2022-08-21 13:12:20,422] {taskinstance.py:1035} INFO - Dependencies all met for <TaskInstance: hello_world.print_world scheduled__2022-08-20T00:17:00+00:00 [queued]>
+[2022-08-21 13:12:20,422] {taskinstance.py:1241} INFO - 
+--------------------------------------------------------------------------------
+[2022-08-21 13:12:20,422] {taskinstance.py:1242} INFO - Starting attempt 1 of 4
+[2022-08-21 13:12:20,422] {taskinstance.py:1243} INFO - 
+--------------------------------------------------------------------------------
+[2022-08-21 13:12:20,438] {taskinstance.py:1262} INFO - Executing <Task(PythonOperator): print_world> on 2022-08-20 00:17:00+00:00
+[2022-08-21 13:12:20,440] {standard_task_runner.py:52} INFO - Started process 78625 to run task
+[2022-08-21 13:12:20,443] {standard_task_runner.py:76} INFO - Running: ['airflow', 'tasks', 'run', 'hello_world', 'print_world', 'scheduled__2022-08-20T00:17:00+00:00', '--job-id', '41', '--raw', '--subdir', 'DAGS_FOLDER/hello.py', '--cfg-path', '/tmp/tmpkqf6at1w', '--error-file', '/tmp/tmp91arfcs8']
+[2022-08-21 13:12:20,444] {standard_task_runner.py:77} INFO - Job 41: Subtask print_world
+[2022-08-21 13:12:20,471] {logging_mixin.py:109} INFO - Running <TaskInstance: hello_world.print_world scheduled__2022-08-20T00:17:00+00:00 [running]> on host ip-172-31-41-223.ap-northeast-2.compute.internal
+[2022-08-21 13:12:20,495] {logging_mixin.py:109} WARNING - /home/ubuntu/anaconda3/lib/python3.9/site-packages/airflow/models/xcom.py:322 SAWarning: TypeDecorator UtcDateTime(timezone=True) will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
+[2022-08-21 13:12:20,503] {logging_mixin.py:109} WARNING - /home/ubuntu/anaconda3/lib/python3.9/site-packages/airflow/models/renderedtifields.py:126 SAWarning: TypeDecorator UtcDateTime(timezone=True) will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
+[2022-08-21 13:12:20,514] {logging_mixin.py:109} WARNING - /home/ubuntu/anaconda3/lib/python3.9/site-packages/airflow/models/renderedtifields.py:162 SAWarning: Coercing Subquery object into a select() for use in IN(); please pass a select() construct explicitly
+[2022-08-21 13:12:20,517] {logging_mixin.py:109} WARNING - /home/ubuntu/anaconda3/lib/python3.9/site-packages/airflow/models/renderedtifields.py:159 SAWarning: TypeDecorator UtcDateTime(timezone=True) will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
+[2022-08-21 13:12:20,521] {taskinstance.py:1412} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=yb
+AIRFLOW_CTX_DAG_ID=hello_world
+AIRFLOW_CTX_TASK_ID=print_world
+AIRFLOW_CTX_EXECUTION_DATE=2022-08-20T00:17:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-08-20T00:17:00+00:00
+[2022-08-21 13:12:20,521] {logging_mixin.py:109} INFO - world
+[2022-08-21 13:12:20,521] {python.py:152} INFO - Done. Returned value was: None
+[2022-08-21 13:12:20,527] {taskinstance.py:1270} INFO - Marking task as SUCCESS. dag_id=hello_world, task_id=print_world, execution_date=20220820T001700, start_date=20220821T131220, end_date=20220821T131220
+[2022-08-21 13:12:20,575] {local_task_job.py:154} INFO - Task exited with return code 0
+[2022-08-21 13:12:20,593] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2022-08-21 13:12:20,595] {logging_mixin.py:109} WARNING - /home/ubuntu/anaconda3/lib/python3.9/site-packages/airflow/models/dag.py:1069 SADeprecationWarning: Query.value() is deprecated and will be removed in a future release.  Please use Query.with_entities() in combination with Query.scalar() (deprecated since: 1.4)
+[2022-08-21 13:12:20,596] {logging_mixin.py:109} WARNING - /home/ubuntu/anaconda3/lib/python3.9/site-packages/airflow/models/dag.py:1069 SADeprecationWarning: Query.values() is deprecated and will be removed in a future release.  Please use Query.with_entities() (deprecated since: 1.4)
