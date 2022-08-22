@@ -1,0 +1,17 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: kurly
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kurly?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
