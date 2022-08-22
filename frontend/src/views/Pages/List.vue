@@ -63,28 +63,10 @@
       };
     },
     created() {
-      //this.getGoodsList();
     },
      methods: {
       getNoimage(e) {
         e.target.src = require("assets/noimage.jpg");
-      },
-      getGoodsList() {
-        var params = {
-          page: this.currentPage,
-          size: this.perPage-1,
-          sort: 'id:desc'
-        };
-
-        var url="/goods";
-        this.$axios.get(url, params)
-        .then((res) => { //요청 성공      
-          this.list = res.data;
-        })
-        .catch((error) => { //요청 실패
-          console.log("상품 목록을 불러오는 데 실패하였습니다.");
-        });
-
       }
     }
   };
