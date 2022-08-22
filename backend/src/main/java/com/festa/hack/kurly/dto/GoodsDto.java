@@ -56,7 +56,9 @@ public class GoodsDto {
         @JsonProperty("margin_min")
         private float marginMin;
         private List<String> tags;
+         @JsonProperty("category_name")
         private String categoryName;
+         @JsonProperty("before_price")
         private int beforePrice;
     }
 
