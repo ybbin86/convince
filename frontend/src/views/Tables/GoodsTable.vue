@@ -1,7 +1,7 @@
 <template>
     <b-card no-body>  
       <b-card-header class="border-0">
-          <span class="float-right"><h5><i class="ni ni-sound-wave ml-2 align-middle"></i> 1시간 기준으로 가격이 변동됩니다.</h5></span>
+          <span class="float-right"><h5>※ 1시간 기준으로 가격이 변동됩니다.</h5></span>
           <h3 class="mb-0">상품목록</h3>
       </b-card-header>
 
@@ -66,7 +66,7 @@
           </el-table-column>
 
           <el-table-column label="마진율"
-                            min-width="120px"
+                            min-width="190px"
                             prop="margin">
           </el-table-column>
       </el-table>
