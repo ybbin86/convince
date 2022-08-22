@@ -112,7 +112,7 @@ public class GoodsService {
                 .orElseThrow(() -> new CustomException(ErrorCode.CATEGORY_NOT_FOUND));
 
         User user = userRepository.findUserByEmail(goodsDto.getEmail())
-                .orElseThrow(() -> new CustomException(ErrorCode.CATEGORY_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         String uuid = UUID.randomUUID().toString();
 
