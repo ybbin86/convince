@@ -20,7 +20,7 @@ class TagServiceTest {
     @Test
     void create() {
         Tag tag = Tag.builder()
-                .name("연말")
+                .name("사과제철")
                 .endDate(LocalDate.of(2022, 12, 25))
                 .startDate(LocalDate.of(2022,12,31))
                 .build();

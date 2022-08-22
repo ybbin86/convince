@@ -4,14 +4,8 @@ import com.festa.hack.kurly.dto.GoodsDto;
 import com.festa.hack.kurly.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping( value = "/goods" )
@@ -38,5 +32,12 @@ public class GoodsController {
         return goodsService.create(goodsDto);
     }
 
+    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    public ResponseEntity detail(@PathVariable long id) {
+
+        log.info( "method: GET, api: /goods/{id} - id: {}", id);
+
+        return goodsService.detail(id);
+    }
 
 }

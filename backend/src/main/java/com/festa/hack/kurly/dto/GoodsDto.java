@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsDto {
@@ -15,7 +16,7 @@ public class GoodsDto {
         private String email;
         @JsonProperty("category_id")
         private long categoryId;
-        private List<Long> tags;
+        private List<Long> tags = new ArrayList<>();
         private String name;
         private String image;
         @JsonProperty("detail_image")
