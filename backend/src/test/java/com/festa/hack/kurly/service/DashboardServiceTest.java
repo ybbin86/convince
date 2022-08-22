@@ -16,7 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 @ActiveProfiles("local")
@@ -80,15 +79,4 @@ class DashboardServiceTest {
 
     }
 
-    @Test
-    void dashBoardTest() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime before7 = now.minusDays(7);
-
-        List<PriceHistory> priceHistoryList = priceHistoryRepository.findAllByGoodsIdAndCreatedTimeAfter(2L, before7);
-        //List<LocalDateTime> labels = priceHistoryList.stream().map(PriceHistory::getCreatedTime).collect(Collectors.toList());
-        List<Integer> prices = priceHistoryList.stream().map(PriceHistory::getPrice).collect(Collectors.toList());
-        //System.out.println(labels);
-        System.out.println(prices);
-    }
 }
