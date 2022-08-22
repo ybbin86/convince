@@ -28,15 +28,10 @@ public class Category extends BaseTimeEntity {
     @Setter
     private int parentId;
 
-    @Setter
-    @Column(nullable = false)
-    private float seasonPoint;
-
     @Builder
-    public Category(String name, int depth, int parentId, float seasonPoint) {
+    public Category(String name, int depth, int parentId) {
         this.name = name;
         this.depth = depth;
         this.parentId = parentId;
-        this.seasonPoint = seasonPoint;
     }
 }
