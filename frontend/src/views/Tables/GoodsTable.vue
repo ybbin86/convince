@@ -1,7 +1,7 @@
 <template>
     <b-card no-body>  
       <b-card-header class="border-0">
-          <span class="float-right"><h5>1시간 기준으로 가격이 변동됩니다.</h5></span>
+          <span class="float-right"><h5><i class="ni ni-sound-wave ml-2 align-middle"></i> 1시간 기준으로 가격이 변동됩니다.</h5></span>
           <h3 class="mb-0">상품목록</h3>
       </b-card-header>
 
@@ -21,7 +21,7 @@
           </el-table-column>
 
           <el-table-column label="품목"
-                            prop="categoryName"
+                            prop="category_name"
                             min-width="100px">
           </el-table-column>
 
@@ -31,7 +31,7 @@
           </el-table-column>
 
           <el-table-column label="해시태그"
-                            min-width="150px"
+                            min-width="200px"
                             class="hashtag">
             <template v-slot="{row}">
               <b-button type="button" v-for="tag in row.tags" :key="tag" class="hashtag" variant="outline-primary" size="sm">
@@ -44,7 +44,7 @@
           </el-table-column>
 
           <el-table-column :label="label[0]"
-                            min-width="250px">
+                            min-width="230px">
             <template v-slot="{row}">
                     {{row.price}} /
                     <span class="mr-2" type="" :class="`text-${row.sub_price_class}`">
@@ -52,28 +52,22 @@
                         <span class="subprice-text">{{row.sub_price | numCommaFilter }} 원</span>
                     </span> 
                     <b-button v-b-modal.chart-modal class="ml-3" size="sm" variant="outline-primary"><i class="ni ni-chart-bar-32"></i></b-button>
- 
            </template>
           </el-table-column>
 
           <el-table-column :label="label[1]"
                   min-width="90px"
-                  prop="margin_rate">
+                  prop="dynamic_margin">
           </el-table-column>
 
-
-          <el-table-column :label="label[2]"
-                            min-width="90px"
-                            prop="margin_min">
-          </el-table-column>
-
-          <el-table-column :label="label[3]"
-                            min-width="90px"
-                            prop="margin_max">
-          </el-table-column>
           <el-table-column label="원가"
                             min-width="100px"
                             prop="cost">
+          </el-table-column>
+
+          <el-table-column label="마진율"
+                            min-width="120px"
+                            prop="margin">
           </el-table-column>
       </el-table>
 
@@ -105,25 +99,23 @@
         total: 0,
         //list: this.$sample.goodsList.data,
         list: [],
-        label: [`실시간 가격(변동가)`, `실시간\n마진율`, `마진율\n하한`, `마진율\n상한`]
+        label: [`실시간 가격\n(변동가)`, `실시간\n마진율`]
       };
     }, 
     computed: {
       tableData() {
-        if(!this.list || this.list.size == 0) {
+        if(!this.list || this.list.length == 0) {
           return [];
         }
 
-        debugger;
         return this.list.map(d => {
           return {
             ...d,
-            margin_rate: ((d.price - d.cost) / d.price * 100).toFixed() + ' %',
-            margin_min: d.margin_min + ' %',
-            margin_max: d.margin_max + ' %',
+            dynamic_margin: Math.round(((d.price - d.cost) / d.price * 100) * 100) / 100 + ' %',
+            margin: d.margin_min + ' % ~ ' + d.margin_max + ' %',
             cost: this.$options.filters.numCommaFilter(d.cost) + ' 원',
             price: this.$options.filters.numCommaFilter(d.price) + ' 원',
-            sub_price: d.price-d.before_price,
+            sub_price: d.price && d.before_price ? d.price-d.before_price : 0,
             sub_price_class: d.price-d.before_price > 0 ? 'danger' : d.price-d.before_price < 0 ? 'info' : '',
             sub_price_updown: d.price-d.before_price > 0 ? 'up' : d.price-d.before_price < 0 ? 'down' : ''
           }
@@ -139,16 +131,17 @@
       },
       getGoodsList() {
         var url="/goods";
+
         var params = {
-          page: this.currentPage,
-          size: this.perPage-1,
+          page: this.currentPage-1,
+          size: this.perPage,
           sort: 'id:desc'
         };
 
-        this.$axios.get(url)
+        this.$axios.get(url, {params})
         .then((res) => { //요청 성공   
-          this.total = res.total;
-          this.list = res.data;
+          this.total = res.data.total;
+          this.list = res.data.data;
         })
         .catch((error) => { //요청 실패
           console.log("상품 목록을 불러오는 데 실패하였습니다.");
