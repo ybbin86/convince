@@ -115,12 +115,10 @@ public class GoodsService {
         User user = userRepository.findUserByEmail(goodsDto.getEmail())
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-        String uuid = UUID.randomUUID().toString();
 
         Goods entity = modelMapper.map(goodsDto, Goods.class);
         entity.setUser(user);
         entity.setCategory(category);
-        entity.setHashValue(uuid);
 
         Goods goods = goodsRepository.save(entity);
 

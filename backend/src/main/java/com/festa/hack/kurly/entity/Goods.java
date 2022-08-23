@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,9 +19,6 @@ public class Goods extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Column(nullable = false, unique = true)
-    private String hashValue;
 
     @Column(nullable = false)
     private String name;
@@ -55,9 +53,13 @@ public class Goods extends BaseTimeEntity {
     @Column(nullable = false)
     private float marginMin;
 
+    @Column(length = 1, nullable = false, columnDefinition = "integer default 1")
+    @ColumnDefault("1") // 0:disable, 1:enable
+    @Setter
+    private int dynamicPricing;
+
     @Builder
-    public Goods(String hashValue, String name, Category category, List<String> sellGoodsList, String image, String detailImage, int price, int cost, float marginMax, float marginMin) {
-        this.hashValue = hashValue;
+    public Goods(String name, Category category, List<String> sellGoodsList, String image, String detailImage, int price, int cost, float marginMax, float marginMin, int dynamicPricing) {
         this.name = name;
         this.category = category;
         this.sellGoodsList = sellGoodsList;
@@ -67,5 +69,6 @@ public class Goods extends BaseTimeEntity {
         this.cost = cost;
         this.marginMax = marginMax;
         this.marginMin = marginMin;
+        this.dynamicPricing = dynamicPricing;
     }
 }
