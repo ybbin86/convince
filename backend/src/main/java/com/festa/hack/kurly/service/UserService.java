@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -65,9 +66,12 @@ public class UserService {
         final String password = req.getPassword();
         final String name = req.getName();
 
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodePassword = passwordEncoder.encode( password );
+
         User user = User.builder()
                 .email(email)
-                .password(password)
+                .password(encodePassword)
                 .name(name)
                 .build();
 

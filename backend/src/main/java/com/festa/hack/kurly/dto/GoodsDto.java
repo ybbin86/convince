@@ -58,9 +58,9 @@ public class GoodsDto {
         @JsonProperty("margin_min")
         private float marginMin;
         private List<String> tags;
-         @JsonProperty("category_name")
+        @JsonProperty("category_name")
         private String categoryName;
-         @JsonProperty("before_price")
+        @JsonProperty("before_price")
         private int beforePrice;
         @JsonProperty("dynamic_pricing")
         private float dynamicPricing; //다이나믹 프라이싱 적용 유무
