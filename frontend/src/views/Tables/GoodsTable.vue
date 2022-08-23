@@ -70,6 +70,14 @@
                             prop="margin">
           </el-table-column>
 
+          
+          <el-table-column :label="label[2]"
+                            min-width="100px"
+                            prop="margin">
+            <template v-slot="{row}">
+              <b-form-checkbox switch v-model="row.dynamic_pricing_flag" @change="toggleDyprFlag(row)" ></b-form-checkbox>
+            </template>
+          </el-table-column>
       </el-table>
 
       <b-card-footer class="py-4 d-flex justify-content-center">
@@ -119,7 +127,8 @@
             price: this.$options.filters.numCommaFilter(d.price) + ' 원',
             sub_price: d.price && d.before_price ? d.price-d.before_price : 0,
             sub_price_class: d.price-d.before_price > 0 ? 'danger' : d.price-d.before_price < 0 ? 'info' : '',
-            sub_price_updown: d.price-d.before_price > 0 ? 'up' : d.price-d.before_price < 0 ? 'down' : ''
+            sub_price_updown: d.price-d.before_price > 0 ? 'up' : d.price-d.before_price < 0 ? 'down' : '',
+            dynamic_pricing_flag: d.dynamic_pricing == 1 ? true:false,
           }
         });
       }
@@ -130,6 +139,40 @@
     methods: {
       getNoimage(e) {
         e.target.src = require("assets/noimage.jpg");
+      },
+      toggleDyprFlag(row) {
+        this.$nextTick(() => {
+          var url="/goods/" + row.id;
+
+          var params = {
+            dynamic_pricing: row.dynamic_pricing_flag == true? 1 : 0,
+          };
+
+          this.$axios.put(url, params)
+          .then((res) => { //요청 성공   
+            var msg = 'Dynamic Pricing이 적용 되었습니다.';
+            
+            if(!row.dynamic_pricing_flag) {
+              msg = 'Dynamic Pricing이 해제 되었습니다.';
+            }
+            this.$swal.fire({
+              title: `Success`,
+              text: msg,
+              buttonsStyling: false,
+              confirmButtonClass: 'btn btn-success',
+              icon: 'success'
+            });
+          })
+          .catch((error) => { //요청 실패
+            this.$swal.fire({
+              title: `Fail`,
+              text: `요청에 실패하였습니다.`,
+              buttonsStyling: false,
+              confirmButtonClass: 'btn btn-warning',
+              icon: 'warning'
+            });
+          });
+        });
       },
       getGoodsList() {
         var url="/goods";
@@ -163,5 +206,8 @@ img {
 }
 .ni-bold-down {
   vertical-align: middle;
+}
+.custom-switch {
+  display: grid;
 }
 </style>
