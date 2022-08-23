@@ -194,4 +194,10 @@ export default {
 .sidebar-menu-item {
   cursor: pointer;
 }
+.nav-item {
+  height: 80px;
+}
+.nav-link-text {
+  font-size: 18px;
+}
 </style>

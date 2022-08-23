@@ -59,7 +59,8 @@
           start_date: '',
           end_date: ''
         },
-        list: this.$sample.hashtagList
+        //list: this.$sample.hashtagList
+        list: []
       };
     },
     created() {
@@ -80,7 +81,7 @@
         if(!this.hashtag.name || !this.hashtag.start_date || !this.hashtag.end_date) {
           this.$swal.fire({
             title: `Fail`,
-            text: `등록에 실패하였습니다.`,
+            text: `입력하지 않은 값이 있습니다.`,
             buttonsStyling: false,
             confirmButtonClass: 'btn btn-warning',
             icon: 'warning'
