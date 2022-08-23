@@ -1,6 +1,6 @@
 import pymysql
 
-conn = pymysql.connect(host='localhost', user='root', password='kurly1234',
+conn = pymysql.connect(host='3.37.92.138', user='admin', password='kurly1234',
                        db='kurly', charset='utf8') # 한글처리 (charset = 'utf8')
 
 
