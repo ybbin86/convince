@@ -38,7 +38,7 @@ public class Goods extends BaseTimeEntity {
     @Getter
     private List<String> sellGoodsList;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String image;
 
     private String detailImage;
