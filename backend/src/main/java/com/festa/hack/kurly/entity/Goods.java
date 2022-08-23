@@ -31,11 +31,6 @@ public class Goods extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Convert(converter = StringListConverter.class)
-    @Column(columnDefinition = "json")
-    @Getter
-    private List<String> sellGoodsList;
-
     @Column(nullable = false, columnDefinition = "TEXT")
     private String image;
 
@@ -59,10 +54,9 @@ public class Goods extends BaseTimeEntity {
     private int dynamicPricing;
 
     @Builder
-    public Goods(String name, Category category, List<String> sellGoodsList, String image, String detailImage, int price, int cost, float marginMax, float marginMin, int dynamicPricing) {
+    public Goods(String name, Category category, String image, String detailImage, int price, int cost, float marginMax, float marginMin, int dynamicPricing) {
         this.name = name;
         this.category = category;
-        this.sellGoodsList = sellGoodsList;
         this.image = image;
         this.detailImage = detailImage;
         this.price = price;
