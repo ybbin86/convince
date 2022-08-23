@@ -142,15 +142,16 @@ public class GoodsService {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    public ResponseEntity detail(long id) {
+    public ResponseEntity update(long id, int dynamicPricing) {
 
         Goods goods = goodsRepository.findById(id)
                 .orElseThrow(()-> new CustomException(ErrorCode.GOODS_NOT_FOUND));
 
-        GoodsDto.GetRes dto = this.getDtoRes(goods, id);
+        goods.setDynamicPricing(dynamicPricing);
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(dto);
+        goodsRepository.save(goods);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
 
     }
 

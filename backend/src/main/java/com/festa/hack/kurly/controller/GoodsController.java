@@ -32,12 +32,12 @@ public class GoodsController {
         return goodsService.create(goodsDto);
     }
 
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    public ResponseEntity detail(@PathVariable long id) {
+    @RequestMapping( value = "/{id}", method = RequestMethod.PUT )
+    public ResponseEntity update(@PathVariable long id, int dynamic_pricing) {
 
-        log.info( "method: GET, api: /goods/{id} - id: {}", id);
+        log.info( "method: PUT, api: /goods/{id} - id: {}, dynamic_pricing: {}", id, dynamic_pricing);
 
-        return goodsService.detail(id);
+        return goodsService.update(id, dynamic_pricing);
     }
 
 }
