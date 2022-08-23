@@ -2,8 +2,8 @@
   <card type="default" header-classes="bg-transparent">
       <b-row align-v="center" slot="header">
         <b-col>
-          <h5 class="h3 text-white mb-0">아오리 사과</h5>
-          <h6 class="text-light text-uppercase ls-1 mb-1">2022-08-01~2022-08-08</h6>
+          <h5 class="h3 text-white mb-0">{{info.name}}</h5>
+          <h6 class="text-light ls-1 mb-1">{{chartPeriod}}</h6>
         </b-col>
       </b-row>
       <b-row>
@@ -22,61 +22,63 @@
   // Charts
   import * as chartConfigs from '@/components/Charts/config';
   import LineChart from '@/components/Charts/LineChart';
-  import BarChart from '@/components/Charts/BarChart';
 
   export default {
     components: {
-      LineChart,
-      BarChart
+      LineChart
+    },
+    props: {
+      info: {
+        id: '',
+        name: ''
+      }
     },
     data() {
       return {
+        //list: this.$sample.chartData,
         bigLineChart: {
-          allData: [
-            [0, 20, 10, 30, 15, 40, 20, 60, 60],
-            [0, 20, 5, 25, 10, 30, 15, 40, 40]
-          ],
-          activeIndex: 0,
-          chartData: {
-            datasets: [
-              {
-                label: 'Performance',
-                data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
-              }
-            ],
-            labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          },
+          chartData: {},
           extraOptions: chartConfigs.blueChartOptions,
         },
-        redBarChart: {
-          chartData: {
-            labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-              label: 'Sales',
-              data: [25, 20, 30, 22, 17, 29]
-            }]
-          },
-          extraOptions: chartConfigs.blueChartOptions
-        }
       };
     },
-    methods: {
-      initBigChart(index) {
-        let chartData = {
-          datasets: [
-            {
-              label: 'Performance',
-              data: this.bigLineChart.allData[index]
-            }
-          ],
-          labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        };
-        this.bigLineChart.chartData = chartData;
-        this.bigLineChart.activeIndex = index;
+    mounted() {
+      this.getData();
+    },
+    computed: {
+      chartPeriod: function() { //오늘 날짜와 오늘로부터 일주일 전 날짜 구하기
+        var d = new Date();
+        var today = d.toJSON().slice(0,10);
+
+        var dd = d.setDate(d.getDate()-7);
+        var beforeDay = new Date(dd).toJSON().slice(0,10);
+
+        return beforeDay + ' ~ ' + today;
       }
     },
-    mounted() {
-      this.initBigChart(0);
+    methods: {
+      getData() {
+        var url="/dashboard/" + this.info.id;
+
+        this.$axios.get(url)
+        .then((res) => { //요청 성공  
+          let chartData = {
+            datasets: [
+              {
+                label: '금액',
+                data: res.data.data
+              }
+            ],
+            labels: res.data.label,
+          };
+          
+          this.bigLineChart.chartData = chartData;
+        })
+        .catch((error) => { //요청 실패
+          console.log("차트 데이터를 불러오는 데 실패하였습니다.");
+        });
+
+      }
     }
   };
 </script>
