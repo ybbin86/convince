@@ -16,10 +16,10 @@ public class SeasonPoint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(targetEntity = Goods.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "goods_id")
+    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     @Setter
-    private Goods goods;
+    private Category category;
 
     @Column(nullable = false)
     private int month;

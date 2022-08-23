@@ -26,8 +26,8 @@ public class GoodsController {
     @RequestMapping( method = RequestMethod.POST )
     public ResponseEntity create(@RequestBody GoodsDto.Create goodsDto) {
 
-        log.info( "method: POST, api: /goods - name: {}, email: {}, category_id: {}, image: {}, detail_image: {}, price: {}, cost: {}, margin_max: {}, margin_min: {}",
-                goodsDto.getName(), goodsDto.getEmail(), goodsDto.getCategoryId(), goodsDto.getImage(), goodsDto.getDetailImage(), goodsDto.getPrice(), goodsDto.getCost(), goodsDto.getMarginMax(), goodsDto.getMarginMin() );
+        log.info( "method: POST, api: /goods - name: {}, email: {}, category_id: {}, image: {}, detail_image: {}, price: {}, cost: {}, margin_max: {}, margin_min: {}, dynamic_pricing: {}",
+                goodsDto.getName(), goodsDto.getEmail(), goodsDto.getCategoryId(), goodsDto.getImage(), goodsDto.getDetailImage(), goodsDto.getPrice(), goodsDto.getCost(), goodsDto.getMarginMax(), goodsDto.getMarginMin(), goodsDto.getDynamicPricing() );
 
         return goodsService.create(goodsDto);
     }
