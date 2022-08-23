@@ -43,7 +43,7 @@ const _axios = axios.create({
 _axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 _axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 _axios.defaults.headers.common['Content-Type'] = "application/json";
-_axios.defaults.headers.common['Access-Control-Request-Methods'] = "GET, POST";
+_axios.defaults.headers.common['Access-Control-Request-Methods'] = "GET, POST, PUT";
 
 
 Vue.prototype.$axios = _axios;
