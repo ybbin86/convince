@@ -32,14 +32,19 @@ import aws_info from './aws_info.Vue'
 // plugin setup
 Vue.use(DashboardPlugin);
 
-axios.defaults.baseURL = "http://localhost:8000";
-axios.defaults.headers.post["Content-Type"] = "application/json; charset=utf-8"
+//axios.defaults.baseURL = "http://localhost:8000";
 
 const _axios = axios.create({
-  withCredentials: true
+  // withCredentials: true
 });
 
-Vue.prototype.$axios = axios;
+_axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+_axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+_axios.defaults.headers.common['Content-Type'] = "application/json";
+_axios.defaults.headers.common['Access-Control-Request-Methods'] = "GET, POST";
+
+
+Vue.prototype.$axios = _axios;
 
 Vue.prototype.$swal = swal;
 

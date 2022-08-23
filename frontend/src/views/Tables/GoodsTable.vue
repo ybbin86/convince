@@ -31,7 +31,7 @@
           </el-table-column>
 
           <el-table-column label="해시태그"
-                            min-width="200px"
+                            min-width="180px"
                             class="hashtag">
             <template v-slot="{row}">
               <b-button type="button" v-for="tag in row.tags" :key="tag" class="hashtag" variant="outline-primary" size="sm">
@@ -50,8 +50,8 @@
                     <span class="mr-2" type="" :class="`text-${row.sub_price_class}`">
                         <i :class="`ni ni-bold-${row.sub_price_updown}`"></i>
                         <span class="subprice-text">{{row.sub_price | numCommaFilter }} 원</span>
-                    </span> 
-                    <b-button v-b-modal.chart-modal class="ml-3" size="sm" variant="outline-primary"><i class="ni ni-chart-bar-32"></i></b-button>
+                    </span>
+                    <b-button v-b-modal.chart-modal class="ml-3" size="sm" variant="outline-primary" @click="chartInfo = row"><i class="ni ni-chart-bar-32"></i></b-button>
            </template>
           </el-table-column>
 
@@ -66,9 +66,10 @@
           </el-table-column>
 
           <el-table-column label="마진율"
-                            min-width="190px"
+                            min-width="140px"
                             prop="margin">
           </el-table-column>
+
       </el-table>
 
       <b-card-footer class="py-4 d-flex justify-content-center">
@@ -77,7 +78,7 @@
 
       <!-- Modal -->          
       <b-modal id="chart-modal" title="실시간 가격 변동 차트 (기준 7일)" hide-footer centered >
-        <chart></chart>
+        <chart :info="chartInfo"></chart>
       </b-modal>
   </b-card>
 </template>
@@ -95,11 +96,12 @@
     data() {
       return {
         currentPage: 1,
-        perPage: 2,   
+        perPage: 10,   
         total: 0,
         //list: this.$sample.goodsList.data,
         list: [],
-        label: [`실시간 가격\n(변동가)`, `실시간\n마진율`]
+        label: [`실시간 가격\n(변동가)`, `실시간\n마진율`, `D·P\n 여부`],
+        chartInfo: {}
       };
     }, 
     computed: {
@@ -137,9 +139,9 @@
           size: this.perPage,
           sort: 'id:desc'
         };
-
+        
         this.$axios.get(url, {params})
-        .then((res) => { //요청 성공   
+        .then((res) => { //요청 성공 
           this.total = res.data.total;
           this.list = res.data.data;
         })
