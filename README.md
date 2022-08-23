@@ -1,4 +1,4 @@
-# kurly-backend
+# convince-backend
 
 ###기술 스택
 - Spring Boot Framework
