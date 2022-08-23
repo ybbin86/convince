@@ -1,6 +1,6 @@
 # convince-backend
 
-###기술 스택
+### 기술 스택
 - Spring Boot Framework
 - Spring Security 
 - MySql 8.0
