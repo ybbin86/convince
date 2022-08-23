@@ -8,10 +8,6 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-RUN chown -R node: /usr/src/app
-
-USER node
-
 EXPOSE 8080
 
 CMD ["npm", "run", "serve"]
