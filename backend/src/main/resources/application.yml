@@ -5,8 +5,8 @@ spring:
     name: kurly
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/kurly?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
-    username: root
+    url: jdbc:mysql://3.37.92.138:3306/kurly?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
+    username: admin
     password: kurly1234
 
   jpa:
