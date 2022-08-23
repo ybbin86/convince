@@ -29,10 +29,16 @@ import 'sweetalert2/dist/sweetalert2.css'
 import sample from './sample.Vue'
 import aws_info from './aws_info.Vue'
 
+import VueCookie from 'vue-cookie';
+
 // plugin setup
 Vue.use(DashboardPlugin);
 
-//axios.defaults.baseURL = "http://localhost:8000";
+Vue.use(VueCookie);
+
+axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.headers.post["Content-Type"] = "application/json; charset=utf-8"
+
 
 const _axios = axios.create({
   // withCredentials: true

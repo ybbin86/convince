@@ -47,6 +47,7 @@
                   <base-input alternative
                               class="mb-3"
                               name="Email"
+                              id="email"
                               :rules="{required: true, email: true}"
                               prepend-icon="ni ni-email-83"
                               placeholder="Email"
@@ -56,6 +57,7 @@
                   <base-input alternative
                               class="mb-3"
                               name="Password"
+                              id="password"
                               :rules="{required: true, min: 6}"
                               prepend-icon="ni ni-lock-circle-open"
                               type="password"
@@ -63,7 +65,6 @@
                               v-model="model.password">
                   </base-input>
 
-                  <b-form-checkbox v-model="model.rememberMe">Remember me</b-form-checkbox>
                   <div class="text-center">
                     <base-button type="primary" native-type="submit" class="my-4">Sign in</base-button>
                   </div>
@@ -90,15 +91,46 @@
       return {
         model: {
           email: '',
-          password: '',
-          rememberMe: false
+          password: ''
         }
       };
     },
     methods: {
       onSubmit() {
-        // this will be called only after form is valid. You can do api call here to login
-      }
+        if(!this.model.email || !this.model.password ) {
+          this.$swal.fire({
+            title: `Fail`,
+            text: `이메일 또는 비밀번호를 입력해주세요.`,
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-warning',
+            icon: 'warning'
+          });
+
+          return;
+        }
+
+        var url="/login";
+        var params = this.model;
+
+        this.$axios.post(url, params)
+          .then((res) => { //요청 성공
+            const token = response.headers['jwt-auth-token'];
+            this.$cookie.set("token", token);
+            const data = response.data;
+            this.$cookie.set("user", JSON.stringify(response.data));
+            // TODO : 상품 목록 페이지로 이동
+
+          })
+          .catch((error) => { //요청 실패
+            this.$swal.fire({
+              title: `Fail`,
+              text: `로그인에 실패하였습니다.`,
+              buttonsStyling: false,
+              confirmButtonClass: 'btn btn-warning',
+              icon: 'warning'
+            });
+          });
+      },
     }
   };
 </script>
