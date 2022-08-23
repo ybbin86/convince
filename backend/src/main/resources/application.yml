@@ -3,32 +3,6 @@ server:
 spring:
   application:
     name: kurly
-
----
-
-# prod
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/kurly_qa?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
-    username: root
-    password: kurly1234
-  jpa:
-    hibernate:
-      ddl-auto: update
-    generate-ddl: true
-    show-sql: false
-
----
-# qa
-
-spring:
-  config:
-    activate:
-      on-profile: qa
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/kurly?dontTrackOpenResources=true&serverTimezone=Asia/Seoul
@@ -38,6 +12,7 @@ spring:
     hibernate:
       ddl-auto: update
     generate-ddl: true
-    show-sql: true
+    show-sql: false
     properties:
       hibernate.format_sql: true
+    database: mysql
