@@ -201,7 +201,7 @@
           name: '',
           category1: '', //상위 카테고리
           category_id: '', //하위 카테고리
-          email: 'test@kurly.com',
+          email: 'admin@test.com',
           seledtedTags: [],
           tags: [],
           cost: '',
@@ -367,6 +367,7 @@
           }
 
         // 해시태그 id 구하기
+        this.prd.tags = [];
         this.prd.seledtedTags.forEach(tag => {
               var temp = this.hashtagList.filter(item => item.name == tag);
               if(temp && temp.length > 0 ) { this.prd.tags.push(temp[0].id); }
