@@ -6,11 +6,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @RequiredArgsConstructor
-public class OrderHistory extends CreatedTimeEntity{
+public class OrderHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +33,18 @@ public class OrderHistory extends CreatedTimeEntity{
     @Column(nullable = false)
     private float margin;
 
+    @Column(nullable = false)
+    private LocalDateTime createdTime;
+
+    @Setter
+    private LocalDateTime updatedTime;
+
     @Builder
-    public OrderHistory(User user, Goods goods, int price, float margin) {
+    public OrderHistory(User user, Goods goods, int price, float margin, LocalDateTime createdTime) {
         this.user = user;
         this.goods = goods;
         this.price = price;
         this.margin = margin;
+        this.createdTime = createdTime;
     }
 }
