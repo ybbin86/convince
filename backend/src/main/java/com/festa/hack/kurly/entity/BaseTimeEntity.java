@@ -15,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 public class BaseTimeEntity {
 
     @CreatedDate
-    @Column(nullable = false)
     private String createdTime;
 
     @LastModifiedDate
