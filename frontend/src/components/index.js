@@ -14,8 +14,6 @@ import StatsCard from './Cards/StatsCard.vue';
 import BaseNav from './Navbar/BaseNav';
 import NavbarToggleButton from './Navbar/NavbarToggleButton';
 
-import TabPane from './Tabs/Tab.vue';
-import Tabs from './Tabs/Tabs.vue';
 import Collapse from './Collapse/Collapse.vue';
 import CollapseItem from './Collapse/CollapseItem.vue';
 import Modal from './Modal.vue';
@@ -41,8 +39,6 @@ export {
   SidebarPlugin,
   BaseNav,
   NavbarToggleButton,
-  TabPane,
-  Tabs,
   Modal,
   BaseSlider,
   BaseButton,
