@@ -1,108 +1,30 @@
-# convince-backend
+# KURLY HACK FESTA - 납뜩이팀
+영화 건축학개론 에서 나오는 ‘납뜩이’ 캐릭터는 영화의 내용을 더욱 풍부하게 만들어줌
+마켓컬리에게 제안하는 아이디어와 팀원들이 추구하는 방향이 비슷하여 탄생
 
-### 기능 목록
-- 로그인
-- 회원가입
-- 상품 목록
-- 상품 등록
-- 카테고리 목록
-- 해시태그 목록
-- 해시태그 등록
-- 상품 적정가 대시보드 
+![image](https://user-images.githubusercontent.com/52481728/186303860-c49c3b8f-df22-4b8d-87f5-a42a192bb54c.png)
 
-### 기술 스택
-- Spring Boot Framework
-- Spring Security 
-- MySql 8.0
-- Lombok
-- JUnit
+## 전체 아키텍처
+![image](https://user-images.githubusercontent.com/52481728/186304600-8a949e87-ea4d-42af-a712-3250a36501da.png)
 
-### 패키징
+* 기술스택
+  * FE
+    * Vue
+  * BE
+    * Spring Boot Framework
+    * Spring Security
+    * Lombok
+    * JUnit
+    * FastAPI
+    * Airflow
+  * DB
+    * MySql 8.0
 
-```bash
-# 패키징
-$ git clone git@github.com:ybbin86/convince.git
+## 서비스 화면
 
-$ cd convince/backend
+![image](https://user-images.githubusercontent.com/52481728/186304499-183e848f-2f26-4a11-aa76-2a3bca418936.png)
+![image](https://user-images.githubusercontent.com/52481728/186304712-483d094f-b250-49a4-8f86-52ba7ee22bc1.png)
 
-# 빌드 결과물은 ./build/libs/에 있음
-$ ./gradlew build --exclude-task test
 
-$ cd build/libs/
-
-$ ls
-kurly-0.0.1-SNAPSHOT.jar
-
-$ java -jar kurly-0.0.1-SNAPSHOT.jar
-```
-
-### 트리구조
-```bash
-src
-├── main
-│ ├── java
-│ │ └── com
-│ │     └── festa
-│ │         └── hack
-│ │             └── kurly
-│ │                 ├── KurlyApplication.java
-│ │                 ├── config
-│ │                 │ ├── ModelMapperConfig.java
-│ │                 │ └── SecurityConfig.java
-│ │                 ├── controller
-│ │                 │ ├── CategoryController.java
-│ │                 │ ├── DashboardController.java
-│ │                 │ ├── GoodsController.java
-│ │                 │ ├── TagController.java
-│ │                 │ └── UserController.java
-│ │                 ├── converter
-│ │                 │ └── StringListConverter.java
-│ │                 ├── custom
-│ │                 │ └── CustomException.java
-│ │                 ├── dto
-│ │                 │ ├── GoodsDto.java
-│ │                 │ └── TagDto.java
-│ │                 ├── entity
-│ │                 │ ├── BaseTimeEntity.java
-│ │                 │ ├── Category.java
-│ │                 │ ├── CreatedTimeEntity.java
-│ │                 │ ├── Goods.java
-│ │                 │ ├── GoodsTagMap.java
-│ │                 │ ├── OrderHistory.java
-│ │                 │ ├── PriceHistory.java
-│ │                 │ ├── SeasonPoint.java
-│ │                 │ ├── Tag.java
-│ │                 │ └── User.java
-│ │                 ├── handler
-│ │                 │ ├── ErrorResponse.java
-│ │                 │ └── GlobalExceptionHandler.java
-│ │                 ├── impl
-│ │                 ├── repository
-│ │                 │ ├── CategoryRepository.java
-│ │                 │ ├── GoodsRepository.java
-│ │                 │ ├── GoodsTagMapRepository.java
-│ │                 │ ├── OrderHistoryRepository.java
-│ │                 │ ├── PriceHistoryRepository.java
-│ │                 │ ├── TagRepository.java
-│ │                 │ └── UserRepository.java
-│ │                 ├── security
-│ │                 │ ├── JwtAuthenticationFilter.java
-│ │                 │ └── JwtTokenProvider.java
-│ │                 ├── service
-│ │                 │ ├── CategoryService.java
-│ │                 │ ├── CustomUserDetailService.java
-│ │                 │ ├── DashboardService.java
-│ │                 │ ├── GoodsService.java
-│ │                 │ ├── TagService.java
-│ │                 │ └── UserService.java
-│ │                 ├── specific
-│ │                 │ └── GoodsSpecific.java
-│ │                 └── type
-│ │                     ├── CategoryDepth.java
-│ │                     ├── ErrorCode.java
-│ │                     └── Role.java
-│ └── resources
-│     ├── application.yml
-│     ├── static
-│     └── templates
-```
+## 모델링
+![image](https://user-images.githubusercontent.com/52481728/186304825-9a654d3e-d048-4f2c-886e-e5cddf4c2d80.png)

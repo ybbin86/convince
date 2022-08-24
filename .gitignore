@@ -36,3 +36,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### python
+*.pyc
+__pycahce__/
+
+*.log
