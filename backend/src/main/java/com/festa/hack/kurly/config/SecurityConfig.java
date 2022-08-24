@@ -44,7 +44,6 @@ public class SecurityConfig {
                 .antMatchers("/signup").permitAll()
                 // 그 외의 모든 api는 토큰이 있어야만 접근 가능
                 .antMatchers( "/**" ).authenticated()
-                .anyRequest().permitAll()
                 .and()
                 // 토큰 체크
                 .addFilterBefore( new JwtAuthenticationFilter( jwtTokenProvider ),
