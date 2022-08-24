@@ -45,6 +45,13 @@ _axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 _axios.defaults.headers.common['Content-Type'] = "application/json";
 _axios.defaults.headers.common['Access-Control-Request-Methods'] = "GET, POST, PUT";
 
+_axios.interceptors.request.use((config) => {
+  var token = VueCookie.get("token");
+  _axios.defaults.headers.common['jwt-auth-token'] = token;
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
 
 Vue.prototype.$axios = _axios;
 
