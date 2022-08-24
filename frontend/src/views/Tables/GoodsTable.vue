@@ -142,13 +142,13 @@
       },
       toggleDyprFlag(row) {
         this.$nextTick(() => {
-          var url="/goods/" + row.id;
-
+          var url = "http://3.37.92.138:8001/dp_onff";
           var params = {
+            id: row.id,
             dynamic_pricing: row.dynamic_pricing_flag == true? 1 : 0,
           };
 
-          this.$axios.put(url, params)
+          this.$axios.post(url, params)
           .then((res) => { //요청 성공   
             var msg = 'Dynamic Pricing이 적용 되었습니다.';
             
