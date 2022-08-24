@@ -2,12 +2,6 @@
 영화 건축학개론 에서 나오는 ‘납뜩이’ 캐릭터는 영화의 내용을 더욱 풍부하게 만들어줌
 마켓컬리에게 제안하는 아이디어와 팀원들이 추구하는 방향이 비슷하여 탄생
 
-![image](https://user-images.githubusercontent.com/52481728/186303860-c49c3b8f-df22-4b8d-87f5-a42a192bb54c.png)
-
-|준용|소현|영빈|나경|
-|--|--|--|--|
-|junyong6025@gmail.com|parksohyan@gmail.com|hust160251@gmail.com|nacoon53@gmail.com|
-
 ## 전체 아키텍처
 ![image](https://user-images.githubusercontent.com/52481728/186304600-8a949e87-ea4d-42af-a712-3250a36501da.png)
 
@@ -56,3 +50,17 @@ Momentum 계수를 활용 (다이니막 프라이싱 영향 Down)
 
 ## 기대효과
 ![image](https://user-images.githubusercontent.com/52481728/186310452-095dea03-8602-421e-aa4a-8c9d4dab35fb.png)
+
+## 개발 향후 계획
+- TDD 기반 클린코드 리팩토링
+- git actions, jenkins를 통해 무중단 배포 CI/CD 구성 예정.
+- 서비스 고도화
+
+
+## 팀원 소개
+
+![image](https://user-images.githubusercontent.com/52481728/186303860-c49c3b8f-df22-4b8d-87f5-a42a192bb54c.png)
+
+|준용|소현|영빈|나경|
+|--|--|--|--|
+|junyong6025@gmail.com|parksohyan@gmail.com|hust160251@gmail.com|nacoon53@gmail.com|
