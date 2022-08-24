@@ -53,7 +53,10 @@ Momentum 계수를 활용 (다이니막 프라이싱 영향 Down)
 
 ## 개발 향후 계획
 - TDD 기반 클린코드 리팩토링
-- git actions, jenkins를 통해 무중단 배포 CI/CD 구성 예정.
+- Github Action과  AWS ECR(Elastic Contaioner Registry)을 통한 배포자동화
+- AWS Lambda를 통한 서버리스 아키텍쳐 구현
+- 해시태그 
+- Reinforcement Learning 적용
 - 서비스 고도화
 
 
