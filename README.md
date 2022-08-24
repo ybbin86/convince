@@ -33,7 +33,7 @@ $ cd build/libs/
 $ ls
 kurly-0.0.1-SNAPSHOT.jar
 
-$ java -jarkurly-0.0.1-SNAPSHOT.jar
+$ java -jar kurly-0.0.1-SNAPSHOT.jar
 ```
 
 ### 트리구조
