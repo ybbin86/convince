@@ -40,12 +40,12 @@ public class GoodsController {
      /*
      상품 다이나믹 프라이싱 적용 여부 변경
      */
-    @RequestMapping( value = "/{id}", method = RequestMethod.POST )
-    public ResponseEntity update(@PathVariable long id, @RequestBody GoodsDto.Create goodsDto) {
+    @RequestMapping( value = "/{id}", method = RequestMethod.PUT )
+    public ResponseEntity update(@PathVariable long id, @RequestParam(defaultValue = "0") int dynamic_pricing) {
 
-        log.info( "method: PUT, api: /goods/{id} - id: {}, dynamic_pricing: {}", id, goodsDto.getDynamicPricing());
+        log.info( "method: PUT, api: /goods/{id} - id: {}, dynamic_pricing: {}", id, dynamic_pricing);
 
-        return goodsService.update(id, goodsDto.getDynamicPricing());
+        return goodsService.update(id, dynamic_pricing);
     }
 
 }
