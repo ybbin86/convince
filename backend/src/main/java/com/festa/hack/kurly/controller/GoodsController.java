@@ -15,6 +15,9 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
+    /*
+    상품 목록 조회
+    */
     @RequestMapping( method = RequestMethod.GET )
     public ResponseEntity get(GoodsDto.GetReq goodsDto) {
 
@@ -23,6 +26,9 @@ public class GoodsController {
         return goodsService.get(goodsDto);
     }
 
+    /*
+    상품 등록
+    */
     @RequestMapping( method = RequestMethod.POST )
     public ResponseEntity create(@RequestBody GoodsDto.Create goodsDto) {
 
@@ -31,7 +37,9 @@ public class GoodsController {
 
         return goodsService.create(goodsDto);
     }
-
+     /*
+     상품 다이나믹 프라이싱 적용 여부 변경
+     */
     @RequestMapping( value = "/{id}", method = RequestMethod.PUT )
     public ResponseEntity update(@PathVariable long id, int dynamic_pricing) {
 

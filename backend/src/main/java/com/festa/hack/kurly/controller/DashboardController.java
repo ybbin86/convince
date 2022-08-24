@@ -17,6 +17,9 @@ public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
+    /*
+    상품 적정가 대시보드 조회
+    */
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public ResponseEntity detail(@PathVariable long id) {
 

@@ -1,6 +1,5 @@
 package com.festa.hack.kurly.entity;
 
-import com.festa.hack.kurly.converter.StringListConverter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

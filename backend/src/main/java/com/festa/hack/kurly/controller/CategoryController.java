@@ -17,6 +17,9 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    /*
+    카테고리 목록 조회
+    */
     @RequestMapping( method = RequestMethod.GET, value = "/{depth}" )
     public ResponseEntity get(@PathVariable( "depth" ) int depth, int parent_id ) {
 

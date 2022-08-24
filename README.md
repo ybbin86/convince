@@ -1,7 +1,5 @@
 # convince-backend
 
-### 기술 스택
-=======
 ### 기능 목록
 - 로그인
 - 회원가입
@@ -12,7 +10,7 @@
 - 해시태그 등록
 - 상품 적정가 대시보드 
 
-###기술 스택g
+### 기술 스택
 - Spring Boot Framework
 - Spring Security 
 - MySql 8.0
@@ -35,7 +33,7 @@ $ cd build/libs/
 $ ls
 kurly-0.0.1-SNAPSHOT.jar
 
-$ java -jarkurly-0.0.1-SNAPSHOT.jar
+$ java -jar kurly-0.0.1-SNAPSHOT.jar
 ```
 
 ### 트리구조
