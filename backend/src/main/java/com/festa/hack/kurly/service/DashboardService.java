@@ -33,6 +33,7 @@ public class DashboardService {
             throw new CustomException(ErrorCode.BAD_REQUEST);
         }
 
+        // 적정가 조회 기준 시간 7일 전 데이터까지 적정가 확인 가능
         LocalDateTime ldt = LocalDateTime.now();
         LocalDateTime before7 = ldt.minusDays(refDay);
         String strBefore7 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(before7);

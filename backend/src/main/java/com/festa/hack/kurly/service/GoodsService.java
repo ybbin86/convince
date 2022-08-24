@@ -47,6 +47,7 @@ public class GoodsService {
 
     public ResponseEntity get(GoodsDto.GetReq goodsDto) {
 
+        // 정렬을 위한 필수값 체크
         if (ObjectUtils.isEmpty(goodsDto.getSort()) || !goodsDto.getSort().contains(":")) {
             throw new CustomException(ErrorCode.BAD_REQUEST);
         }
@@ -59,6 +60,7 @@ public class GoodsService {
             direction = Sort.Direction.ASC;
         }
 
+        // 페이징 처리를 위한 값
         Pageable pageable = PageRequest.of( goodsDto.getPage(), goodsDto.getSize(), direction, sort[0]);
 
         long categoryId = goodsDto.getCategoryId();
@@ -66,6 +68,7 @@ public class GoodsService {
 
         Specification<Goods> spec = (root, query, criteriaBuilder) -> null;
 
+        // 검색값에 따른 조건 추가
         if (categoryId > 0) {
             spec = Specification.where(GoodsSpecific.equalCategoryId(categoryId));
         }
@@ -73,10 +76,18 @@ public class GoodsService {
             spec = spec.and(GoodsSpecific.likeName(name));
         }
 
-        Page<Goods> goods = goodsRepository.findAll(spec, pageable);
+        Page<Goods> goods = null;
+        try {
+            goods = goodsRepository.findAll(spec, pageable);
+        } catch (Exception e) {
+
+            System.out.printf(e.getStackTrace().toString());
+        }
+
 
         List<GoodsDto.GetRes> res = new ArrayList<>();
         for (Goods content : goods.getContent()) {
+            // 상품에 등록된 태그 목록 조회
             List<GoodsTagMap> goodsTagMaps = goodsTagMapRepository.findAllByGoodsId(content.getId());
 
             List<String> tags = new ArrayList<>();
@@ -84,6 +95,7 @@ public class GoodsService {
                 tags.add(goodsTagMap.getTag().getName());
             }
 
+            // 상품의 1시간 전 가격 조회
             int beforePrice = 0;
             Optional<PriceHistory> priceHistory = priceHistoryRepository.findPriceHistoryByGoodsIdBeforePrice(content.getId());
             if (priceHistory.isPresent()) {
@@ -109,9 +121,11 @@ public class GoodsService {
     @Transactional
     public ResponseEntity create(GoodsDto.Create goodsDto) {
 
+        // 카테고리 아이디 필수값 체크
         Category category = categoryRepository.findById(goodsDto.getCategoryId())
                 .orElseThrow(() -> new CustomException(ErrorCode.CATEGORY_NOT_FOUND));
 
+        // 유저 이메일 필수값 체크
         User user = userRepository.findUserByEmail(goodsDto.getEmail())
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
@@ -123,15 +137,18 @@ public class GoodsService {
         Goods goods = goodsRepository.save(entity);
 
         for (long tagId : goodsDto.getTags()) {
+            // 존재하는 태그인지 체크
             Tag tag = tagRepository.findById(tagId).orElseThrow(() -> new CustomException(ErrorCode.TAG_NOT_FOUND));
             GoodsTagMap goodsTagMap = GoodsTagMap.builder()
                     .goods(goods)
                     .tag(tag)
                     .build();
 
+            // 상품에 태그 등록
             goodsTagMapRepository.save(goodsTagMap);
         }
 
+        // 상품의 가격 정보 등록
         PriceHistory priceHistory = PriceHistory.builder()
                 .price(goods.getPrice())
                 .goods(goods)
@@ -144,27 +161,16 @@ public class GoodsService {
 
     public ResponseEntity update(long id, int dynamicPricing) {
 
+        // 상품 존재 여부 체크
         Goods goods = goodsRepository.findById(id)
                 .orElseThrow(()-> new CustomException(ErrorCode.GOODS_NOT_FOUND));
 
+        // 다이나믹 프라이싱 적용 여부 변경
         goods.setDynamicPricing(dynamicPricing);
 
         goodsRepository.save(goods);
 
         return ResponseEntity.status(HttpStatus.OK).build();
 
-    }
-
-    private GoodsDto.GetRes getDtoRes(Goods goods, long goodsId) {
-        List<GoodsTagMap> goodsTagMaps = goodsTagMapRepository.findAllByGoodsId(goodsId);
-
-        List<String> tags = new ArrayList<>();
-        for (GoodsTagMap goodsTagMap : goodsTagMaps) {
-            tags.add(goodsTagMap.getTag().getName());
-        }
-        GoodsDto.GetRes dto = modelMapper.map(goods, GoodsDto.GetRes.class);
-        dto.setTags(tags);
-
-        return dto;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -26,18 +26,31 @@ public class UserService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     public ResponseEntity login(User req, HttpServletResponse response) {
 
         final String email = req.getEmail();
         final String password = req.getPassword();
+
+        // 이메일, 비밀번호 필수값 체크
         if ( ObjectUtils.isEmpty(email) || ObjectUtils.isEmpty(password)) {
             log.error("email or password is required");
             throw new CustomException(ErrorCode.BAD_REQUEST);
         }
 
-        User user = userRepository.findUserByEmailAndPassword(email, password)
+        // 가입된 유저 이메일인지 확인
+        User user = userRepository.findUserByEmail(email)
                 .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+        // 비밀번호를 인코딩한 값과 저장된 비밀번호가 일치하는지 확인
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new CustomException(ErrorCode.PASSWORD_INVALID);
+        }
+
+        // 토큰 생성
         String token = null;
         try {
             token = jwtTokenProvider.createToken(user);
@@ -51,6 +64,7 @@ public class UserService {
             throw new CustomException(ErrorCode.TOKEN_FAILED);
         }
 
+        // 토큰을 헤더에 담아서 리턴
         response.setHeader("jwt-auth-token", token);
 
         return ResponseEntity.ok().build();
@@ -66,12 +80,9 @@ public class UserService {
         final String password = req.getPassword();
         final String name = req.getName();
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodePassword = passwordEncoder.encode( password );
-
         User user = User.builder()
                 .email(email)
-                .password(encodePassword)
+                .password(passwordEncoder.encode(password)) // 패스워드 인코딩
                 .name(name)
                 .build();
 
