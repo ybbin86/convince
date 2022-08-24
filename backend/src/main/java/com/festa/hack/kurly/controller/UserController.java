@@ -19,6 +19,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    /*
+     로그인
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public ResponseEntity login(HttpServletResponse response, @RequestBody final User user) {
 
@@ -27,6 +31,9 @@ public class UserController {
         return userService.login(user, response);
     }
 
+    /*
+     로그아웃
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/logout")
     public ResponseEntity logout() {
 
@@ -35,6 +42,9 @@ public class UserController {
         return userService.logout();
     }
 
+    /*
+     회원가입
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
     public ResponseEntity signup(@RequestBody final User user) {
 

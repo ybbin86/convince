@@ -2,7 +2,6 @@ package com.festa.hack.kurly.config;
 
 import com.festa.hack.kurly.security.JwtAuthenticationFilter;
 import com.festa.hack.kurly.security.JwtTokenProvider;
-import com.festa.hack.kurly.type.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,13 +39,14 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
                 .and()
                 .authorizeRequests()
-                //.antMatchers( "/goods" ).authenticated()
-//                .antMatchers( "/tag" ).authenticated()
-//                .antMatchers( "/category" ).authenticated()
-//                .antMatchers( "/admin/**" ).hasRole( Role.ADMIN.name() )
-//                .antMatchers( "/**" ).permitAll()
+                // 로그인 회원가입은 모두 접근 가능
+                .antMatchers("/login").permitAll()
+                .antMatchers("/signup").permitAll()
+                // 그 외의 모든 api는 토큰이 있어야만 접근 가능
+                .antMatchers( "/**" ).authenticated()
                 .anyRequest().permitAll()
                 .and()
+                // 토큰 체크
                 .addFilterBefore( new JwtAuthenticationFilter( jwtTokenProvider ),
                         UsernamePasswordAuthenticationFilter.class )
                 .logout()
