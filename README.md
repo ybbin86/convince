@@ -25,6 +25,9 @@
     * Docker
   * DB
     * MySql 8.0
+  * AWS
+    * EC2
+    * S3
 
 ## 서비스 화면
 
@@ -43,24 +46,22 @@
 
 ### Momentum
 ![image](https://user-images.githubusercontent.com/52481728/186310193-6662f0a2-7f8e-4ea9-8abc-75005ae555c4.png)
-- 저녁 또는 새벽에(22시~04시) 거래량 감소하는 것을 대비를 위한
+- 저녁 또는 새벽에(22시~04시) 거래량 감소를 대비하기 위해
 Momentum 계수를 활용 (다이니막 프라이싱 영향 Down)
 - 거래량 감소시 상품의 적정가격이 변동 되는 것을 방지하기 위함
 
-
-## 기대효과
-![image](https://user-images.githubusercontent.com/52481728/186310452-095dea03-8602-421e-aa4a-8c9d4dab35fb.png)
 
 ## 개발 향후 계획
 - TDD 기반 클린코드 리팩토링
 - Github Action과  AWS ECR(Elastic Contaioner Registry)을 통한 배포자동화
 - AWS Lambda를 통한 서버리스 아키텍쳐 구현
-- 해시태그 
+- 해시태그 사용 범위 확대
 - Reinforcement Learning 적용
 - 서비스 고도화
+- ELK 스택 적용
 
 
-## 팀원 소개
+## 팀 소개
 
 ![image](https://user-images.githubusercontent.com/52481728/186303860-c49c3b8f-df22-4b8d-87f5-a42a192bb54c.png)
 
