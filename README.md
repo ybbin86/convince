@@ -4,9 +4,9 @@
 
 ![image](https://user-images.githubusercontent.com/52481728/186303860-c49c3b8f-df22-4b8d-87f5-a42a192bb54c.png)
 
-|준용|소현|나경|영빈|
+|준용|소현|영빈|나경|
 |--|--|--|--|
-|junyong6025@gmail.com|parksohyan@gmail.com|nacoon53@gmail.com|hust160251@gmail.com|
+|junyong6025@gmail.com|parksohyan@gmail.com|hust160251@gmail.com|nacoon53@gmail.com|
 
 ## 전체 아키텍처
 ![image](https://user-images.githubusercontent.com/52481728/186304600-8a949e87-ea4d-42af-a712-3250a36501da.png)
