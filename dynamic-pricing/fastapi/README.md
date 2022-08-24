@@ -9,7 +9,7 @@
 
 ```
 cp .development.env .local.env
-.local.env 에 NW_HOME 값을 현재 readme.md의 경로로 변경해줌
+.local.env 에 CONVINCE_HOME 값을 현재 readme.md의 경로로 변경해줌
 ```
 
 ## FastAPI 실행 방법
