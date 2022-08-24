@@ -60,14 +60,6 @@ Vue.prototype.$aws_info = aws_info;
 Vue.filter('numCommaFilter', function (value) {
   return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 })
-//단위값 '원'을 붙인다.
-Vue.filter('moneyFilter', function (value) {
-  return value + '원';
-})
-//숫자를 시간 단위로 변환한다.
-Vue.filter('numToTimeFilter', function (value) {
-  return Math.floor(value) + '시간 ' + (value%1 == 0? '' : '30분');
-})
 
 /* eslint-disable no-new */
 new Vue({
