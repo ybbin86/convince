@@ -183,7 +183,15 @@
           sort: 'id:desc'
         };
         
-        this.$axios.get(url, {params})
+        const token = this.$cookie.get('token');
+        this.$axios.get(url, {
+          headers: {'jwt-auth-token': token},
+          params: {
+            page: this.currentPage-1,
+            size: this.perPage,
+            sort: 'id:desc'
+          }
+        })
         .then((res) => { //요청 성공 
           this.total = res.data.total;
           this.list = res.data.data;

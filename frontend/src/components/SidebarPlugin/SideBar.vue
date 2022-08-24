@@ -20,7 +20,7 @@
                               </span>
                             </div>
                         </a>
-                        <a href="#!" class="dropdown-item">
+                        <a class="dropdown-item" @click="logout">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>
@@ -77,6 +77,11 @@
       };
     },
     methods: {
+      logout() {
+        this.$cookie.delete("token");
+        this.$axios.defaults.headers.common['jwt-auth-token'] = '';
+        this.$router.push('/login');
+      },
       closeSidebar() {
         this.$sidebar.displaySidebar(false)
       },

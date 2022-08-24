@@ -6,8 +6,8 @@ import NotFound from '@/views/NotFoundPage.vue';
 const routes = [
   {
     path: '/',
-    redirect: 'list',
     component: DashboardLayout,
+    meta:{ auth : true }, 
     children: [
       {
         path: '/hashtag',
@@ -37,7 +37,6 @@ const routes = [
   },
   {
     path: '/',
-    redirect: 'login',
     component: AuthLayout,
     children: [
       {
@@ -54,5 +53,6 @@ const routes = [
     ]
   }
 ];
+
 
 export default routes;
