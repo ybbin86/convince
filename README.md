@@ -13,12 +13,19 @@
 
 * 기술스택
   * FE
-    * Vue
+    * Vue.js 2
+    * Axios
+    * vue-cookie
+    * vue-chartjs
+    * vue-router
+    * BootstrapVue
+    * BootstrapVue Argon Template
   * BE
     * Spring Boot Framework
     * Spring Security
     * Lombok
     * JUnit
+    * JPA
     * FastAPI
     * Airflow
     * Docker
