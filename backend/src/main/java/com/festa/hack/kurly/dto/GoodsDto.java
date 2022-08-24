@@ -28,7 +28,7 @@ public class GoodsDto {
         @JsonProperty("margin_min")
         private float marginMin;
         @JsonProperty("dynamic_pricing")
-        private float dynamicPricing; //다이나믹 프라이싱 적용 유무
+        private int dynamicPricing; //다이나믹 프라이싱 적용 유무
     }
 
     @Getter
@@ -63,7 +63,7 @@ public class GoodsDto {
         @JsonProperty("before_price")
         private int beforePrice;
         @JsonProperty("dynamic_pricing")
-        private float dynamicPricing; //다이나믹 프라이싱 적용 유무
+        private int dynamicPricing; //다이나믹 프라이싱 적용 유무
     }
 
 
