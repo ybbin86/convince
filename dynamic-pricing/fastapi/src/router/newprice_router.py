@@ -7,9 +7,11 @@ from fastapi import APIRouter, Request, Response, status
 from src.service.utils import load_model, load_transform
 from src.models.price_model import NewPrice
 from src.database.connect import conn
+from src.core.config import settings
 
 import pandas as pd
 from datetime import date
+import os
 
 router = APIRouter(prefix='/new_price')
 
@@ -30,8 +32,8 @@ async def predict_price(payload: NewPrice, request: Request) -> dict:
         category_id : 카테고리 아이디
         cost : 원가
     '''
-    transformer = load_transform('/home/ubuntu/yb/src/service/transformer.pkl')     # 전처리 transform load
-    model = load_model('/home/ubuntu/yb/src/service/new_price.pkl')                 # 모델 load
+    transformer = load_transform(os.path.join(settings.CONVINCE_HOME,'src','service','trasformer.pkl'))     # 전처리 transform load
+    model = load_model(os.path.join(settings.CONVINCE_HOME,'src','service','new_price.pkl'))                 # 모델 load
 
     # 계절지수를 구하기 위해 현재 월 구함
     cur = conn.cursor()

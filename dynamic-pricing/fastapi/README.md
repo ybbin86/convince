@@ -5,10 +5,17 @@
 * 적정가 예측 : 새로운 상품 등록시 적정가 예측
 * dynamic pricing : 1시간 단위 동적 가격 변경
 
+## local 개발 처음 세팅
+
+```
+cp .development.env .local.env
+.local.env 에 NW_HOME 값을 현재 readme.md의 경로로 변경해줌
+```
+
 ## FastAPI 실행 방법
 
 ```shell
-uvicorn src.app:app --host 0.0.0.0 --port 8000 --reload
+uvicorn src.app:app --host 0.0.0.0 --port 8001 --reload
 ```
 
 ## Docker 빌드&실행

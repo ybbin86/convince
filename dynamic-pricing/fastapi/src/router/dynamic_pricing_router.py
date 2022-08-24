@@ -6,11 +6,13 @@ from fastapi import APIRouter, Request, Response, status
 
 from src.database.connect import conn
 from src.service.utils import load_model, load_transform
+from src.core.config import settings
 
 import pandas as pd
 import logging
 from datetime import datetime
 import random
+import os
 
 router = APIRouter(prefix='/dynamic_pricing')
 
@@ -20,8 +22,8 @@ async def predict_price(request: Request) -> dict:
     eta = 0.3
     now = datetime.now()
 
-    transformer = load_transform('/home/ubuntu/yb/src/service/transformer_dynamic_pricing.pkl')     # 전처리 transform load
-    model = load_transform('/home/ubuntu/yb/src/service/model_dynamic_pricing.pkl')                 # 모델 load
+    transformer = load_transform(os.path.join(settings.CONVINCE_HOME,'src','service','trasformer_dynamic_pricing.pkl'))     # 전처리 transform load
+    model = load_model(os.path.join(settings.CONVINCE_HOME,'src','service','model_dynamic_pricing.pkl'))                 # 모델 load
     
     # 상품 중 토글 활성화 된 상품 데이터 가져옴
     cur = conn.cursor()

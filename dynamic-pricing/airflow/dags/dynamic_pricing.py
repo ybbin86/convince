@@ -1,4 +1,3 @@
-#hello_world.py
 from datetime import timedelta 
 import requests
 
@@ -14,8 +13,8 @@ def send_query() -> None:
     if response.status_code==404:
         raise Exception('응답없음')
 
-def print_world():
-    return "Hello"
+def print_success():
+    return "success"
 
 with DAG(
     dag_id="dynamic_pricing",
@@ -33,7 +32,7 @@ with DAG(
     )
     t2 = PythonOperator(
         task_id = "print_world",
-        python_callable=print_world,
+        python_callable=print_success,
         depends_on_past= True,
         owner="yb",
         retries = 3,
