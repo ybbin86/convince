@@ -81,7 +81,7 @@
       </el-table>
 
       <b-card-footer class="py-4 d-flex justify-content-center">
-          <base-pagination v-model="currentPage" :per-page="perPage" :total="total"></base-pagination>
+        <b-pagination v-model="currentPage" :total-rows="total" :per-page="perPage" @change="getGoodsList()"></b-pagination>
       </b-card-footer>
 
       <!-- Modal -->          
@@ -175,29 +175,31 @@
         });
       },
       getGoodsList() {
-        var url="/goods";
+        this.$nextTick(() => {
+          var url="/goods";
 
-        var params = {
-          page: this.currentPage-1,
-          size: this.perPage,
-          sort: 'id:desc'
-        };
-        
-        const token = this.$cookie.get('token');
-        this.$axios.get(url, {
-          headers: {'jwt-auth-token': token},
-          params: {
+          var params = {
             page: this.currentPage-1,
             size: this.perPage,
             sort: 'id:desc'
-          }
-        })
-        .then((res) => { //요청 성공 
-          this.total = res.data.total;
-          this.list = res.data.data;
-        })
-        .catch((error) => { //요청 실패
-          console.log("상품 목록을 불러오는 데 실패하였습니다.");
+          };
+          
+          const token = this.$cookie.get('token');
+          this.$axios.get(url, {
+            headers: {'jwt-auth-token': token},
+            params: {
+              page: this.currentPage-1,
+              size: this.perPage,
+              sort: 'id:desc'
+            }
+          })
+          .then((res) => { //요청 성공 
+            this.total = res.data.total;
+            this.list = res.data.data;
+          })
+          .catch((error) => { //요청 실패
+            console.log("상품 목록을 불러오는 데 실패하였습니다.");
+          });
         });
       }
     }
