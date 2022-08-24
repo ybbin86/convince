@@ -1,8 +1,10 @@
 import Vue from 'vue';
+import VueCookie from 'vue-cookie';
 import VueRouter from 'vue-router';
 import routes from './routes';
 
 Vue.use(VueRouter);
+Vue.use(VueCookie);
 
 // configure router
 const router = new VueRouter({
@@ -20,4 +22,16 @@ const router = new VueRouter({
   }
 });
 
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(r => r.meta.auth)) {
+    if (!VueCookie.get("token")) {
+      next('/login');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 export default router;

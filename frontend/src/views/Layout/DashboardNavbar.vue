@@ -36,7 +36,7 @@
           <!-- <b-dropdown-header class="noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </b-dropdown-header> -->
-          <b-dropdown-item href="#!">
+          <b-dropdown-item @click="logout" >
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </b-dropdown-item>
@@ -78,6 +78,11 @@ export default {
     };
   },
   methods: {
+    logout() {
+      this.$cookie.delete("token");
+      this.$axios.defaults.headers.common['jwt-auth-token'] = '';
+      this.$router.push('/login');
+    },
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },

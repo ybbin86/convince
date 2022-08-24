@@ -7,8 +7,7 @@
           <b-row class="justify-content-center">
             <b-col xl="5" lg="6" md="8" class="px-5">
               <h1 class="text-white">Welcome!</h1>
-              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for
-                free.</p>
+              <p class="text-lead text-white">납뜩이</p>
             </b-col>
           </b-row>
         </div>
@@ -25,22 +24,9 @@
       <b-row class="justify-content-center">
         <b-col lg="5" md="7">
           <b-card no-body class="bg-secondary border-0 mb-0">
-            <b-card-header class="bg-transparent pb-5"  >
-              <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
-              <div class="btn-wrapper text-center">
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="img/icons/common/github.svg"></span>
-                  <span class="btn-inner--text">Github</span>
-                </a>
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="img/icons/common/google.svg"></span>
-                  <span class="btn-inner--text">Google</span>
-                </a>
-              </div>
-            </b-card-header>
             <b-card-body class="px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>안녕하세요!</small>
               </div>
               <validation-observer v-slot="{handleSubmit}" ref="formValidator">
                 <b-form role="form" @submit.prevent="handleSubmit(onSubmit)">
@@ -58,7 +44,7 @@
                               class="mb-3"
                               name="Password"
                               id="password"
-                              :rules="{required: true, min: 6}"
+                              :rules="{required: true, min: 4}"
                               prepend-icon="ni ni-lock-circle-open"
                               type="password"
                               placeholder="Password"
@@ -73,9 +59,7 @@
             </b-card-body>
           </b-card>
           <b-row class="mt-3">
-            <b-col cols="6">
-              <router-link to="/dashboard" class="text-light"><small>Forgot password?</small></router-link>
-            </b-col>
+            <b-col cols="6"></b-col>
             <b-col cols="6" class="text-right">
               <router-link to="/register" class="text-light"><small>Create new account</small></router-link>
             </b-col>
@@ -97,6 +81,12 @@
     },
     methods: {
       onSubmit() {
+        //  const token ='1234';
+        //     this.$cookie.set("token", token);
+
+        //     this.$axios.defaults.headers.common['jwt-auth-token'] = token;
+        //     this.$router.push('/list');
+        //     return;
         if(!this.model.email || !this.model.password ) {
           this.$swal.fire({
             title: `Fail`,
@@ -114,12 +104,13 @@
 
         this.$axios.post(url, params)
           .then((res) => { //요청 성공
-            const token = response.headers['jwt-auth-token'];
-            this.$cookie.set("token", token);
-            const data = response.data;
-            this.$cookie.set("user", JSON.stringify(response.data));
-            // TODO : 상품 목록 페이지로 이동
 
+            const token = res.headers['jwt-auth-token'];
+            this.$cookie.set("token", token);
+            
+            const data = res.data;
+            this.$cookie.set("user", JSON.stringify(res.data));
+            this.$router.push('/list');
           })
           .catch((error) => { //요청 실패
             this.$swal.fire({

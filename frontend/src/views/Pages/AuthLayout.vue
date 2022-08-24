@@ -1,54 +1,5 @@
 <template>
   <div class="main-content bg-default">
-    <base-nav
-      v-model="showMenu"
-      :transparent="true"
-      menu-classes="justify-content-end"
-      class="navbar-horizontal navbar-main navbar-top navbar-dark"
-      expand="lg"
-    >
-      <div slot="brand" class="navbar-wrapper">
-        <b-navbar-brand to="/">
-          <img src="img/brand/white.png">
-        </b-navbar-brand>
-      </div>
-
-     <template>
-       <div class="navbar-collapse-header">
-         <b-row>
-           <b-col cols="6" class="collapse-brand">
-             <router-link to="/">
-               <img src="img/brand/green.png">
-             </router-link>
-           </b-col>
-           <b-col cols="6" class="collapse-close">
-             <button type="button" class="navbar-toggler" @click="showMenu = false">
-               <span></span>
-               <span></span>
-             </button>
-           </b-col>
-         </b-row>
-       </div>
-         <b-navbar-nav  class="align-items-lg-center ml-lg-auto">
-           <b-nav-item to="/dashboard">
-               <i class="ni ni-planet"></i>
-               <span class="nav-link-inner--text">Dashboard</span>
-           </b-nav-item>
-           <b-nav-item to="/register">
-               <i class="ni ni-circle-08"></i>
-               <span class="nav-link-inner--text">Register</span>
-           </b-nav-item>
-           <b-nav-item to="/login">
-               <i class="ni ni-key-25"></i>
-               <span class="nav-link-inner--text">Login</span>
-           </b-nav-item>
-           <b-nav-item to="/profile">
-               <i class="ni ni-single-02"></i>
-               <span class="nav-link-inner--text">Profile</span>
-           </b-nav-item>
-       </b-navbar-nav>
-     </template>
-    </base-nav>
 
     <div class="main-content">
       <zoom-center-transition
@@ -64,24 +15,8 @@
         <b-row align-v="center" class="justify-content-xl-between">
           <b-col xl="6">
             <div class="copyright text-center text-xl-left text-muted">
-              © {{year}} <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+              © {{year}} <router-link to="/login" class="font-weight-bold ml-1" >납뜩이</router-link>
             </div>
-          </b-col>
-          <b-col xl="6" class="col-xl-6">
-            <b-nav  class="nav-footer justify-content-center justify-content-xl-end">
-              <b-nav-item href="https://www.creative-tim.com" target="_blank" >
-                Creative Tim
-              </b-nav-item>
-              <b-nav-item href="https://www.creative-tim.com/presentation" target="_blank" >
-                About Us
-              </b-nav-item>
-              <b-nav-item href="http://blog.creative-tim.com"  target="_blank">
-                Blog
-              </b-nav-item>
-              <b-nav-item href="https://www.creative-tim.com/license" target="_blank">
-                License
-              </b-nav-item>
-            </b-nav>
           </b-col>
         </b-row>
       </b-container>
