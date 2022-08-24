@@ -31,7 +31,7 @@
 ![image](https://user-images.githubusercontent.com/52481728/186304825-9a654d3e-d048-4f2c-886e-e5cddf4c2d80.png)
 
 ### tag score
-https://user-images.githubusercontent.com/52481728/186310039-f8a42a7a-3cc2-4eb7-b9eb-3e86f859901f.png
+![image](https://user-images.githubusercontent.com/52481728/186310039-f8a42a7a-3cc2-4eb7-b9eb-3e86f859901f.png)
 - 이벤트 해당일 하루 평균 매출액 과 연간 하루 평균 매출액을 나눠줌
 - log를 씌워 변화가 없다면 0, 상승 했다면 가중치를 부여
 - 아이템과 연관된 모든 활성 tag들에 대해 계산하여 합산
