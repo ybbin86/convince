@@ -10,7 +10,7 @@
                 <b-form-input list="my-list-id" v-model="hashtag.name"></b-form-input>
 
                 <datalist id="my-list-id">
-                    <option v-for="item in list" :key="item">{{ item.name }}</option>
+                    <option v-for="(item, index) in list" :key="index">{{ item.name }}</option>
                 </datalist>
             </b-col>
         </b-col>
@@ -59,8 +59,8 @@
           start_date: '',
           end_date: ''
         },
-        //list: this.$sample.hashtagList
-        list: []
+        list: this.$sample.hashtagList
+        //list: []
       };
     },
     created() {

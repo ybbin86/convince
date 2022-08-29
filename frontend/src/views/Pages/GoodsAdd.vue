@@ -116,8 +116,7 @@
                     <b-col lg="6">
                       <base-input
                         type="number"
-                        label="원가(매입가)"                        
-                        @change="getMarginRate"
+                        label="원가(매입가)"
                         placeholder="0"
                         v-model="prd.cost"
                       >
@@ -161,7 +160,6 @@
                         type="number"
                         label="판매가"
                         placeholder="0"
-                        @change="getMarginRate"
                         v-model="prd.price"
                       >
                       </base-input>
@@ -201,7 +199,7 @@
           name: '',
           category1: '', //상위 카테고리
           category_id: '', //하위 카테고리
-          email: 'admin@test.com',
+          email: this.$cookie.get("user")? JSON.parse(this.$cookie.get("user")).email: '',
           seledtedTags: [],
           tags: [],
           cost: '',
@@ -229,7 +227,7 @@
         return margin;
       },
       predictBtnDisabled() {
-        if(this.prd.cost > 0 && this.prd.margin_min > 0 && this.prd.margin_max > 0 && Number(this.prd.margin_min) <= Number(this.prd.margin_max)) {
+        if(!!this.prd.category_id && this.prd.cost > 0 && this.prd.margin_min > 0 && this.prd.margin_max > 0 && Number(this.prd.margin_min) <= Number(this.prd.margin_max)) {
           return false;
         }
         return true;
@@ -350,9 +348,7 @@
           });
         });
       },
-      getMarginRate() { //마진율 구하기
-      },
-      async addGoods() {        
+      async addGoods() {   
         //유효성 체크
         if(!(this.file1 && this.prd.name && this.prd.category1 && this.prd.category_id 
             && this.prd.cost && this.prd.margin_min && this.prd.margin_max && this.prd.price)) {

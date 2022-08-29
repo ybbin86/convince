@@ -142,7 +142,7 @@
       },
       toggleDyprFlag(row) {
         this.$nextTick(() => {
-          var url = "http://3.37.92.138:8001/dp_onff";
+          var url = "http://3.37.92.138:8001/dp_onoff";
           var params = {
             id: row.id,
             dynamic_pricing: row.dynamic_pricing_flag == true? 1 : 0,

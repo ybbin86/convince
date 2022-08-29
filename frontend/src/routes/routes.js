@@ -7,6 +7,7 @@ const routes = [
   {
     path: '/',
     component: DashboardLayout,
+    redirect: '/list',
     meta:{ auth : true }, 
     children: [
       {
