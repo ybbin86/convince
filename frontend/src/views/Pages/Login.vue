@@ -109,7 +109,11 @@
             this.$cookie.set("token", token);
             
             const data = res.data;
-            this.$cookie.set("user", JSON.stringify(res.data));
+            this.$cookie.set("user", 
+              JSON.stringify({
+                email: this.model.email
+              })
+            );
             this.$router.push('/list');
           })
           .catch((error) => { //요청 실패

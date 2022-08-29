@@ -201,7 +201,7 @@
           name: '',
           category1: '', //상위 카테고리
           category_id: '', //하위 카테고리
-          email: 'admin@test.com',
+          email: this.$cookie.get("user")? JSON.parse(this.$cookie.get("user")).email: '',
           seledtedTags: [],
           tags: [],
           cost: '',
