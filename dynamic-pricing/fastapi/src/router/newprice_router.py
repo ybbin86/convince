@@ -32,7 +32,7 @@ async def predict_price(payload: NewPrice, request: Request) -> dict:
         category_id : 카테고리 아이디
         cost : 원가
     '''
-    transformer = load_transform(os.path.join(settings.CONVINCE_HOME,'src','service','trasformer.pkl'))     # 전처리 transform load
+    transformer = load_transform(os.path.join(settings.CONVINCE_HOME,'src','service','transformer.pkl'))     # 전처리 transform load
     model = load_model(os.path.join(settings.CONVINCE_HOME,'src','service','new_price.pkl'))                 # 모델 load
 
     # 계절지수를 구하기 위해 현재 월 구함
@@ -43,7 +43,7 @@ async def predict_price(payload: NewPrice, request: Request) -> dict:
     data = [[
         payload.margin_max*0.01*payload.cost + payload.cost, 
         payload.margin_min*0.01*payload.cost + payload.cost,
-        row[0],       
+        0.2,       
         mapping[payload.category_id], 
         payload.cost]]
     x_test = pd.DataFrame(data, columns=['최고가격', '최저가격', '계절지수', '카테고리', '원가'])
